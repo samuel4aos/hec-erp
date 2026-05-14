@@ -85,16 +85,14 @@ app.use('/api/remittances', remittancesRoutes);
 app.use('/api/uploads', uploadsRoutes);
 app.use('/api/preacher-log', preacherLogRoutes);
 
-// Serve built frontend in local dev
-if (!process.env.VERCEL) {
-  const distPath = path.join(__dirname, '..', 'dist');
-  app.use(express.static(distPath));
-  app.get('*', (req, res) => {
-    if (!req.path.startsWith('/api/')) {
-      res.sendFile(path.join(distPath, 'index.html'));
-    }
-  });
-}
+// Serve built frontend
+const distPath = path.join(__dirname, '..', 'dist');
+app.use(express.static(distPath));
+app.get('*', (req, res) => {
+  if (!req.path.startsWith('/api/')) {
+    res.sendFile(path.join(distPath, 'index.html'));
+  }
+});
 
 // Only listen when run directly (not on Vercel serverless)
 if (!process.env.VERCEL) {
