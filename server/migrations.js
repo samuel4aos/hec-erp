@@ -1,6 +1,10 @@
 const { sql } = require('./db');
 
 async function runMigrations() {
+  if (!sql) {
+    console.warn('No database connection — skipping migrations');
+    return;
+  }
   // site_content table (used by CMS routes)
   await sql`
     CREATE TABLE IF NOT EXISTS site_content (
