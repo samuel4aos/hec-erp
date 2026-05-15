@@ -1,8 +1,13 @@
 const OpenAI = require('openai');
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+function getOpenAI() {
+  if (!process.env.OPENAI_API_KEY) return null;
+  return new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+}
 
 async function categorizePrayer(text) {
+  const openai = getOpenAI();
+  if (!openai) return 'other';
   try {
     const resp = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
@@ -24,6 +29,8 @@ async function categorizePrayer(text) {
 }
 
 async function generateSermonNotes(transcript) {
+  const openai = getOpenAI();
+  if (!openai) return '';
   try {
     const resp = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
@@ -45,6 +52,8 @@ async function generateSermonNotes(transcript) {
 }
 
 async function generatePrayerResponse(prayerText, memberName) {
+  const openai = getOpenAI();
+  if (!openai) return 'Your prayer request has been received. The HEC intercessory team is praying with you.';
   try {
     const resp = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
