@@ -83,7 +83,7 @@ export default function Navbar({ current, setCurrent, onOpenLogin }: Props) {
 
   return (
     <header className="fixed top-0 inset-x-0 z-40">
-      <div className="glass-dark border-b border-gold/20">
+      <div className="glass-dark border-b border-silver/20">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
           <button onClick={() => setCurrent("home")} className="shrink-0">
             <Logo />
@@ -96,15 +96,15 @@ export default function Navbar({ current, setCurrent, onOpenLogin }: Props) {
                 onClick={() => setCurrent(n.id)}
                 className={`relative px-3 py-2 text-[12.5px] tracking-wide rounded-md transition ${
                   current === n.id
-                    ? "text-gold"
-                    : "text-parchment/75 hover:text-parchment"
+                    ? "text-accent"
+                    : "text-body hover:text-body"
                 }`}
               >
                 {t(n.key)}
                 {current === n.id && (
                   <motion.span
                     layoutId="navactive"
-                    className="absolute -bottom-0.5 left-2 right-2 h-px bg-gradient-to-r from-transparent via-gold to-transparent"
+                    className="absolute -bottom-0.5 left-2 right-2 h-px bg-gradient-to-r from-transparent via-accent to-transparent"
                   />
                 )}
               </button>
@@ -115,15 +115,15 @@ export default function Navbar({ current, setCurrent, onOpenLogin }: Props) {
             <LanguageToggle />
             {user ? (
               <div className="flex items-center gap-2 px-3 py-1.5 glass rounded-full text-xs">
-                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-gold to-maroon grid place-items-center font-display text-[10px] text-ink">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-accent to-accent grid place-items-center font-display text-[10px] text-white">
                   {user.full_name.split(" ").map(n => n[0]).slice(0, 2).join("")}
                 </div>
-                <span className="text-parchment/85 hidden sm:inline">{user.full_name.split(" ")[0]}</span>
+                <span className="text-body hidden sm:inline">{user.full_name.split(" ")[0]}</span>
               </div>
             ) : (
               <button
                 onClick={onOpenLogin}
-                className="px-4 py-2 rounded-full btn-gold text-xs inline-flex items-center gap-2"
+                className="px-4 py-2 rounded-full btn-primary text-xs inline-flex items-center gap-2"
               >
                 <LogIn className="w-3.5 h-3.5" /> Portal Login
               </button>
@@ -131,7 +131,7 @@ export default function Navbar({ current, setCurrent, onOpenLogin }: Props) {
           </div>
 
           <button
-            className="lg:hidden p-2 text-gold"
+            className="lg:hidden p-2 text-accent"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -144,7 +144,7 @@ export default function Navbar({ current, setCurrent, onOpenLogin }: Props) {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden border-t border-gold/15 overflow-hidden"
+              className="lg:hidden border-t border-silver/15 overflow-hidden"
             >
               <div className="px-5 py-3 grid grid-cols-2 gap-2">
                 {PUBLIC_NAV.map((n) => (
@@ -153,8 +153,8 @@ export default function Navbar({ current, setCurrent, onOpenLogin }: Props) {
                     onClick={() => { setCurrent(n.id); setOpen(false); }}
                     className={`text-left px-3 py-2 rounded-md text-sm ${
                       current === n.id
-                        ? "bg-maroon/40 text-gold"
-                        : "text-parchment/80"
+                        ? "bg-accent/40 text-accent"
+                        : "text-body"
                     }`}
                   >
                     {t(n.key)}
@@ -162,7 +162,7 @@ export default function Navbar({ current, setCurrent, onOpenLogin }: Props) {
                 ))}
                 <button
                   onClick={() => { onOpenLogin(); setOpen(false); }}
-                  className="col-span-2 text-left px-3 py-2 rounded-md text-sm inline-flex items-center gap-2 bg-gold/20 text-gold"
+                  className="col-span-2 text-left px-3 py-2 rounded-md text-sm inline-flex items-center gap-2 bg-accent/20 text-accent"
                 >
                   <LogIn className="w-4 h-4" /> Portal Login
                 </button>
@@ -173,9 +173,9 @@ export default function Navbar({ current, setCurrent, onOpenLogin }: Props) {
       </div>
 
       {/* Announcement ticker */}
-      <div className="bg-gradient-to-r from-maroon-dark via-maroon to-maroon-dark border-b border-gold/30 overflow-hidden">
-        <div className="flex items-center gap-3 px-4 h-9 text-[12px] text-parchment/95">
-          <span className="shrink-0 px-2 py-0.5 rounded bg-gold text-ink font-bold tracking-wider text-[10px]">
+      <div className="bg-gradient-to-r from-accent-dark via-accent to-accent-dark border-b border-silver/30 overflow-hidden">
+        <div className="flex items-center gap-3 px-4 h-9 text-[12px] text-white/85">
+          <span className="shrink-0 px-2 py-0.5 rounded bg-accent text-white font-bold tracking-wider text-[10px]">
             HQ LIVE
           </span>
           <div className="overflow-hidden flex-1">

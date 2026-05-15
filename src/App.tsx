@@ -116,7 +116,7 @@ export default function App() {
   const isAdmin = section.startsWith('admin-') || section === 'analytics' || section === 'portal' || section.startsWith('portal-') || section.startsWith('workspace-');
 
   return (
-    <div className="min-h-screen maroon-bg">
+    <div className="min-h-screen accent-bg">
       {!isAdmin && (
         <Navbar
           current={section}

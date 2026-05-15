@@ -55,31 +55,31 @@ export default function MembersDirectory() {
   return (
     <div className="max-w-7xl mx-auto px-5 lg:px-8 py-10">
       <div className="pt-20">
-        <div className="text-[11px] tracking-[0.4em] uppercase text-gold/80 mb-3">
+        <div className="text-[11px] tracking-[0.4em] uppercase text-accent/80 mb-3">
           Admin Portal
         </div>
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
-            <h1 className="font-display text-4xl md:text-5xl gold-text">Member Directory</h1>
-            <p className="mt-3 text-parchment/65 max-w-2xl">
+            <h1 className="font-display text-4xl md:text-5xl heading-text">Member Directory</h1>
+            <p className="mt-3 text-body max-w-2xl">
               Manage all registered members across your branches.
             </p>
           </div>
-          <button onClick={() => setShowAdd(true)} className="px-5 py-2.5 rounded-full btn-gold text-sm inline-flex items-center gap-2">
+          <button onClick={() => setShowAdd(true)} className="px-5 py-2.5 rounded-full btn-primary text-sm inline-flex items-center gap-2">
             <UserPlus className="w-4 h-4" /> Add Member
           </button>
         </div>
-        <div className="gold-divider mt-6 max-w-xs" />
+        <div className="silver-divider mt-6 max-w-xs" />
       </div>
 
       {/* Search */}
       <div className="mt-8 relative max-w-md">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gold/60" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-accent/60" />
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by name, email, or phone..."
-          className="w-full bg-black/40 border border-gold/15 rounded-full pl-10 pr-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50"
+          className="w-full bg-white border border-silver/30 rounded-full pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-accent/50"
         />
       </div>
 
@@ -94,11 +94,11 @@ export default function MembersDirectory() {
           <div key={s.label} className="glass rounded-xl p-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-8 h-8 rounded-lg grid place-items-center" style={{ background: s.color }}>
-                <s.icon className="w-4 h-4 text-parchment" />
+                <s.icon className="w-4 h-4 text-body" />
               </div>
             </div>
-            <div className="font-display text-2xl gold-text">{s.value}</div>
-            <div className="text-[10px] uppercase tracking-widest text-parchment/55">{s.label}</div>
+            <div className="font-display text-2xl heading-text">{s.value}</div>
+            <div className="text-[10px] uppercase tracking-widest text-body">{s.label}</div>
           </div>
         ))}
       </div>
@@ -113,20 +113,20 @@ export default function MembersDirectory() {
             viewport={{ once: true }}
             transition={{ delay: i * 0.03 }}
             onClick={() => setSelected(member)}
-            className="text-left glass rounded-2xl p-5 hover:border-gold/50 transition"
+            className="text-left glass rounded-2xl p-5 hover:border-silver/50 transition"
           >
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-maroon grid place-items-center font-display text-sm text-ink shrink-0">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-accent grid place-items-center font-display text-sm text-white shrink-0">
                 {member.first_name[0]}{member.last_name[0]}
               </div>
               <div className="min-w-0 flex-1">
-                <div className="font-display text-base text-parchment truncate">
+                <div className="font-display text-base text-body truncate">
                   {member.first_name} {member.last_name}
                 </div>
-                <div className="flex items-center gap-2 text-[11px] text-parchment/60 mt-0.5">
+                <div className="flex items-center gap-2 text-[11px] text-body mt-0.5">
                   {member.branch_name && (
                     <span className="inline-flex items-center gap-1">
-                      <Church className="w-3 h-3 text-gold/70" />
+                      <Church className="w-3 h-3 text-accent/70" />
                       {member.branch_name}
                     </span>
                   )}
@@ -135,34 +135,34 @@ export default function MembersDirectory() {
                   )}
                 </div>
               </div>
-              <ChevronRight className="w-4 h-4 text-parchment/40 ml-auto shrink-0" />
+              <ChevronRight className="w-4 h-4 text-body ml-auto shrink-0" />
             </div>
             {member.departments && member.departments.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {member.departments.slice(0, 4).map((d: string) => (
-                  <span key={d} className="text-[9px] px-2 py-0.5 rounded-full bg-maroon/40 text-parchment/80 border border-gold/20 tracking-wide">
+                  <span key={d} className="text-[9px] px-2 py-0.5 rounded-full bg-accent/40 text-body border border-silver/20 tracking-wide">
                     {d}
                   </span>
                 ))}
                 {member.departments.length > 4 && (
-                  <span className="text-[9px] text-parchment/50">+{member.departments.length - 4}</span>
+                  <span className="text-[9px] text-body">+{member.departments.length - 4}</span>
                 )}
               </div>
             )}
-            <div className="mt-3 flex items-center gap-3 text-[11px] text-parchment/50">
+            <div className="mt-3 flex items-center gap-3 text-[11px] text-body">
               {member.phone && (
                 <span className="inline-flex items-center gap-1">
                   <Phone className="w-3 h-3" /> {member.phone}
                 </span>
               )}
-              <span className={`inline-flex items-center gap-1 ${member.membership_status === "active" ? "text-verdant-light" : "text-parchment/40"}`}>
+              <span className={`inline-flex items-center gap-1 ${member.membership_status === "active" ? "text-accent" : "text-body"}`}>
                 ● {member.membership_status === "active" ? "Active" : member.membership_status || "Member"}
               </span>
             </div>
           </motion.button>
         ))}
         {filtered.length === 0 && (
-          <div className="col-span-full text-center py-16 text-parchment/50 text-sm">
+          <div className="col-span-full text-center py-16 text-body text-sm">
             {search ? "No members match your search." : "Loading members..."}
           </div>
         )}
@@ -173,28 +173,28 @@ export default function MembersDirectory() {
         <>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={() => setShowAdd(false)} className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50" />
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="fixed inset-0 z-50 grid place-items-center p-4">
-            <div className="w-full max-w-md glass-dark rounded-3xl p-6 border border-gold/30" onClick={(e) => e.stopPropagation()}>
+            <div className="w-full max-w-md glass-dark rounded-3xl p-6 border border-silver/30" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between mb-4">
-                <div className="font-display text-lg gold-text">Add Member</div>
-                <button onClick={() => setShowAdd(false)} className="text-parchment/60 hover:text-gold"><X className="w-5 h-5" /></button>
+                <div className="font-display text-lg heading-text">Add Member</div>
+                <button onClick={() => setShowAdd(false)} className="text-body hover:text-accent"><X className="w-5 h-5" /></button>
               </div>
               <div className="space-y-3">
                 <div className="grid grid-cols-2 gap-3">
-                  <input value={addForm.first_name} onChange={(e) => setAddForm({ ...addForm, first_name: e.target.value })} placeholder="First name" className="bg-black/40 border border-gold/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-gold/50" />
-                  <input value={addForm.last_name} onChange={(e) => setAddForm({ ...addForm, last_name: e.target.value })} placeholder="Last name" className="bg-black/40 border border-gold/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-gold/50" />
+                  <input value={addForm.first_name} onChange={(e) => setAddForm({ ...addForm, first_name: e.target.value })} placeholder="First name" className="bg-white border border-silver/30 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-silver/50" />
+                  <input value={addForm.last_name} onChange={(e) => setAddForm({ ...addForm, last_name: e.target.value })} placeholder="Last name" className="bg-white border border-silver/30 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-silver/50" />
                 </div>
-                <input value={addForm.email} onChange={(e) => setAddForm({ ...addForm, email: e.target.value })} placeholder="Email" className="w-full bg-black/40 border border-gold/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-gold/50" />
-                <input value={addForm.phone} onChange={(e) => setAddForm({ ...addForm, phone: e.target.value })} placeholder="Phone" className="w-full bg-black/40 border border-gold/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-gold/50" />
+                <input value={addForm.email} onChange={(e) => setAddForm({ ...addForm, email: e.target.value })} placeholder="Email" className="w-full bg-white border border-silver/30 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-silver/50" />
+                <input value={addForm.phone} onChange={(e) => setAddForm({ ...addForm, phone: e.target.value })} placeholder="Phone" className="w-full bg-white border border-silver/30 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-silver/50" />
                 <div className="grid grid-cols-2 gap-3">
-                  <select value={addForm.gender} onChange={(e) => setAddForm({ ...addForm, gender: e.target.value })} className="bg-black/40 border border-gold/15 rounded-lg px-3 py-2.5 text-sm">
+                  <select value={addForm.gender} onChange={(e) => setAddForm({ ...addForm, gender: e.target.value })} className="bg-white border border-silver/30 rounded-lg px-3 py-2.5 text-sm">
                     <option className="bg-ink" value="">Gender</option>
                     <option className="bg-ink" value="male">Male</option>
                     <option className="bg-ink" value="female">Female</option>
                   </select>
-                  <input value={addForm.city} onChange={(e) => setAddForm({ ...addForm, city: e.target.value })} placeholder="City" className="bg-black/40 border border-gold/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-gold/50" />
+                  <input value={addForm.city} onChange={(e) => setAddForm({ ...addForm, city: e.target.value })} placeholder="City" className="bg-white border border-silver/30 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-silver/50" />
                 </div>
               </div>
-              <button onClick={addMember} className="mt-5 w-full py-3 rounded-full btn-gold text-sm inline-flex items-center justify-center gap-2">
+              <button onClick={addMember} className="mt-5 w-full py-3 rounded-full btn-primary text-sm inline-flex items-center justify-center gap-2">
                 <Save className="w-4 h-4" /> Save Member
               </button>
             </div>
@@ -217,58 +217,58 @@ export default function MembersDirectory() {
             className="fixed inset-0 z-50 grid place-items-center p-4"
           >
             <div
-              className="w-full max-w-lg glass-dark rounded-3xl overflow-hidden border border-gold/30"
+              className="w-full max-w-lg glass-dark rounded-3xl overflow-hidden border border-silver/30"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gold to-maroon grid place-items-center font-display text-xl text-ink">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-accent to-accent grid place-items-center font-display text-xl text-white">
                       {selected.first_name[0]}{selected.last_name[0]}
                     </div>
                     <div>
-                      <div className="font-display text-2xl text-parchment">
+                      <div className="font-display text-2xl text-body">
                         {selected.first_name} {selected.last_name}
                       </div>
-                      <div className="text-xs text-parchment/60">
+                      <div className="text-xs text-body">
                         {selected.occupation || "No occupation listed"}
                       </div>
                     </div>
                   </div>
-                  <button onClick={() => setSelected(null)} className="text-parchment/60 hover:text-gold">
+                  <button onClick={() => setSelected(null)} className="text-body hover:text-accent">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
 
                 <div className="mt-6 space-y-3">
                   {selected.email && (
-                    <div className="flex items-center gap-3 text-sm text-parchment/75">
-                      <Mail className="w-4 h-4 text-gold" /> {selected.email}
+                    <div className="flex items-center gap-3 text-sm text-body">
+                      <Mail className="w-4 h-4 text-accent" /> {selected.email}
                     </div>
                   )}
                   {selected.phone && (
-                    <div className="flex items-center gap-3 text-sm text-parchment/75">
-                      <Phone className="w-4 h-4 text-gold" /> {selected.phone}
+                    <div className="flex items-center gap-3 text-sm text-body">
+                      <Phone className="w-4 h-4 text-accent" /> {selected.phone}
                     </div>
                   )}
                   {selected.date_of_birth && (
-                    <div className="flex items-center gap-3 text-sm text-parchment/75">
-                      <Calendar className="w-4 h-4 text-gold" /> {new Date(selected.date_of_birth).toLocaleDateString()}
+                    <div className="flex items-center gap-3 text-sm text-body">
+                      <Calendar className="w-4 h-4 text-accent" /> {new Date(selected.date_of_birth).toLocaleDateString()}
                     </div>
                   )}
                   {(selected.city || selected.country) && (
-                    <div className="flex items-center gap-3 text-sm text-parchment/75">
-                      <MapPin className="w-4 h-4 text-gold" /> {[selected.city, selected.country].filter(Boolean).join(", ")}
+                    <div className="flex items-center gap-3 text-sm text-body">
+                      <MapPin className="w-4 h-4 text-accent" /> {[selected.city, selected.country].filter(Boolean).join(", ")}
                     </div>
                   )}
                 </div>
 
                 {selected.spiritual_gifts && selected.spiritual_gifts.length > 0 && (
                   <div className="mt-5">
-                    <div className="text-[10px] tracking-widest text-gold/80 uppercase mb-2">Spiritual Gifts</div>
+                    <div className="text-[10px] tracking-widest text-accent/80 uppercase mb-2">Spiritual Gifts</div>
                     <div className="flex flex-wrap gap-1.5">
                       {selected.spiritual_gifts.map((g) => (
-                        <span key={g} className="text-[10px] px-2.5 py-1 rounded-full bg-gold/20 text-gold border border-gold/30">
+                        <span key={g} className="text-[10px] px-2.5 py-1 rounded-full bg-accent/20 text-accent border border-silver/30">
                           {g}
                         </span>
                       ))}
@@ -278,10 +278,10 @@ export default function MembersDirectory() {
 
                 {selected.departments && selected.departments.length > 0 && (
                   <div className="mt-4">
-                    <div className="text-[10px] tracking-widest text-gold/80 uppercase mb-2">Departments</div>
+                    <div className="text-[10px] tracking-widest text-accent/80 uppercase mb-2">Departments</div>
                     <div className="flex flex-wrap gap-1.5">
                       {selected.departments.map((d) => (
-                        <span key={d} className="text-[10px] px-2.5 py-1 rounded-full bg-maroon/30 text-parchment/80 border border-gold/20">
+                        <span key={d} className="text-[10px] px-2.5 py-1 rounded-full bg-accent/30 text-body border border-silver/20">
                           {d}
                         </span>
                       ))}
@@ -289,9 +289,9 @@ export default function MembersDirectory() {
                   </div>
                 )}
 
-                <div className="mt-5 pt-4 border-t border-gold/20 flex items-center justify-between text-xs">
-                  <span className="text-parchment/50">Member since {new Date(selected.membership_date).toLocaleDateString()}</span>
-                  <span className="text-verdant-light font-semibold">{selected.membership_status}</span>
+                <div className="mt-5 pt-4 border-t border-silver/20 flex items-center justify-between text-xs">
+                  <span className="text-body">Member since {new Date(selected.membership_date).toLocaleDateString()}</span>
+                  <span className="text-accent font-semibold">{selected.membership_status}</span>
                 </div>
               </div>
             </div>

@@ -162,7 +162,7 @@ export default function DailyManna() {
             >
               <ChevronLeft className="w-4 h-4" /> Previous
             </button>
-            <button className="px-4 py-2 rounded-full btn-gold text-sm inline-flex items-center gap-2">
+            <button className="px-4 py-2 rounded-full btn-primary text-sm inline-flex items-center gap-2">
               <Share2 className="w-4 h-4" /> Share today's word
             </button>
             <button
@@ -177,7 +177,7 @@ export default function DailyManna() {
         {/* Side panel */}
         <div className="space-y-5">
           <div className="glass rounded-2xl p-5">
-            <div className="font-display text-lg gold-text inline-flex items-center gap-2">
+            <div className="font-display text-lg heading-text inline-flex items-center gap-2">
               <BookOpen className="w-4 h-4" /> This week
             </div>
             <div className="mt-3 space-y-2">
@@ -187,11 +187,11 @@ export default function DailyManna() {
                   onClick={() => setI(k)}
                   className={`w-full text-left px-3 py-2.5 rounded-lg border transition ${
                     k === i
-                      ? "bg-maroon/40 border-gold/40 text-parchment"
-                      : "border-transparent hover:bg-white/5 text-parchment/75"
+                      ? "bg-accent/40 border-silver/40 text-body"
+                      : "border-transparent hover:bg-white/5 text-body"
                   }`}
                 >
-                  <div className="text-[10px] tracking-widest text-gold/70">
+                  <div className="text-[10px] tracking-widest text-accent/70">
                     {dv.date}
                   </div>
                   <div className="text-sm">{dv.title}</div>
@@ -205,28 +205,28 @@ export default function DailyManna() {
             animate={{ opacity: 1 }}
             className="glass-dark rounded-2xl p-5"
           >
-            <div className="text-[10px] tracking-widest text-gold/80 uppercase">
+            <div className="text-[10px] tracking-widest text-accent/80 uppercase">
               Verse of the Hour
             </div>
-            <div className="font-script italic text-2xl leading-tight text-parchment mt-2">
+            <div className="font-script italic text-2xl leading-tight text-body mt-2">
               "Be still, and know that I am God."
             </div>
-            <div className="text-sm text-gold mt-2">— Psalm 46:10</div>
+            <div className="text-sm text-accent mt-2">— Psalm 46:10</div>
           </motion.div>
 
           <div className="glass rounded-2xl p-5">
-            <div className="font-display text-base text-parchment">
+            <div className="font-display text-base text-body">
               Subscribe to Daily Manna
             </div>
-            <p className="text-xs text-parchment/65 mt-1">
+            <p className="text-xs text-body mt-1">
               Get the devotional via Email/SMS at 5:30 AM your local time.
             </p>
             <div className="mt-3 flex gap-2">
               <input
                 placeholder="you@example.com"
-                className="flex-1 bg-black/40 border border-gold/15 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-gold/50"
+                className="flex-1 bg-white border border-silver/30 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-silver/50"
               />
-              <button className="px-4 py-2 rounded-full btn-gold text-sm">Subscribe</button>
+              <button className="px-4 py-2 rounded-full btn-primary text-sm">Subscribe</button>
             </div>
           </div>
         </div>

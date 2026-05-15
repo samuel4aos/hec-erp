@@ -70,28 +70,28 @@ export default function AdminSidebar({ onNavigate, current, fullHeight }: AdminS
 
   return (
     <aside
-      className={`fixed left-0 ${fullHeight ? 'top-0' : 'top-[104px]'} bottom-0 z-30 glass-dark border-r border-gold/30 flex flex-col transition-all duration-300 ${
+      className={`fixed left-0 ${fullHeight ? 'top-0' : 'top-[104px]'} bottom-0 z-30 glass-dark border-r border-silver/30 flex flex-col transition-all duration-300 ${
         collapsed ? 'w-[60px]' : 'w-[240px]'
       }`}
     >
       {/* Collapse toggle */}
       <button
         onClick={() => setCollapsed((v) => !v)}
-        className="absolute -right-3 top-3 w-6 h-6 rounded-full bg-maroon border border-gold/40 grid place-items-center text-gold hover:bg-maroon-light z-10"
+        className="absolute -right-3 top-3 w-6 h-6 rounded-full bg-accent border border-silver/40 grid place-items-center text-white hover:bg-accent-light z-10"
       >
         {collapsed ? <ChevronRight className="w-3 h-3" /> : <ChevronLeft className="w-3 h-3" />}
       </button>
 
       {/* User info */}
       {!collapsed && (
-        <div className="p-4 border-b border-gold/20">
+        <div className="p-4 border-b border-silver/20">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-gold to-maroon grid place-items-center font-display text-xs text-ink shrink-0">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-accent to-accent grid place-items-center font-display text-xs text-white shrink-0">
               {user.full_name?.split(' ').map((n: string) => n[0]).slice(0, 2).join('')}
             </div>
             <div className="min-w-0">
-              <div className="text-sm text-parchment font-medium truncate">{user.full_name}</div>
-              <div className="text-[9px] uppercase tracking-widest text-gold/80">
+              <div className="text-sm text-body font-medium text-body truncate">{user.full_name}</div>
+              <div className="text-[9px] uppercase tracking-widest text-muted">
                 {user.role === 'hq_admin' ? 'HQ SUPER-ADMIN' :
                  user.role === 'pastor' ? 'BRANCH PASTOR' :
                  user.role === 'treasurer' ? 'TREASURER' : 'USHERS'}
@@ -112,8 +112,8 @@ export default function AdminSidebar({ onNavigate, current, fullHeight }: AdminS
               title={collapsed ? item.label : undefined}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition ${
                 active
-                  ? 'bg-gold/15 text-gold border border-gold/30'
-                  : 'text-parchment/70 hover:text-parchment hover:bg-white/5 border border-transparent'
+                  ? 'bg-accent/15 text-accent border border-silver/30'
+                  : 'text-body hover:text-body hover:bg-white/5 border border-transparent'
               } ${collapsed ? 'justify-center' : ''}`}
             >
               <item.icon className="w-4 h-4 shrink-0" />
@@ -124,21 +124,21 @@ export default function AdminSidebar({ onNavigate, current, fullHeight }: AdminS
       </div>
 
       {/* Bottom actions */}
-      <div className="p-2 border-t border-gold/20 space-y-0.5">
+      <div className="p-2 border-t border-silver/20 space-y-0.5">
         <button
           onClick={() => onNavigate('home')}
           title={collapsed ? 'Public View' : undefined}
-          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-parchment/70 hover:text-parchment hover:bg-white/5 transition ${
+          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-body hover:text-body hover:bg-white/5 transition ${
             collapsed ? 'justify-center' : ''
           }`}
         >
-          <Bell className="w-4 h-4 shrink-0 text-gold" />
+          <Bell className="w-4 h-4 shrink-0 text-body" />
           {!collapsed && <span>Public View</span>}
         </button>
         <button
           onClick={logout}
           title={collapsed ? 'Sign Out' : undefined}
-          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-maroon-light hover:bg-white/5 transition ${
+          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-body hover:text-heading hover:bg-accent/5 transition ${
             collapsed ? 'justify-center' : ''
           }`}
         >

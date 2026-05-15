@@ -75,27 +75,27 @@ export default function OverseerSection() {
         >
           <div className="relative mx-auto max-w-sm">
             {/* Glow behind portrait */}
-            <div className="absolute -inset-8 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.25),transparent_60%)]" />
+            <div className="absolute -inset-8 bg-[radial-gradient(ellipse_at_center,rgba(44,62,80,0.15),transparent_60%)]" />
             {/* Portrait frame */}
-            <div className="relative rounded-[2rem] overflow-hidden border-2 border-gold/40 shadow-2xl">
+            <div className="relative rounded-[2rem] overflow-hidden border-2 border-silver/40 shadow-2xl">
               {cms.image_url ? (
                 <img src={cms.image_url} alt={cms.name} className="w-full aspect-[4/5] object-cover" />
               ) : (
-              <div className="aspect-[4/5] bg-gradient-to-br from-maroon-dark via-ink to-maroon-dark flex items-end justify-center p-6">
+              <div className="aspect-[4/5] bg-gradient-to-br from-accent-dark via-accent-dark to-accent-dark flex items-end justify-center p-6">
                 <div className="text-center">
-                  <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-gold/30 to-maroon/50 border-2 border-gold/40 grid place-items-center">
-                    <span className="font-display text-6xl gold-text">JA</span>
+                  <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-accent/30 to-accent/50 border-2 border-silver/40 grid place-items-center">
+                    <span className="font-display text-6xl text-white">JA</span>
                   </div>
-                  <div className="mt-4 gold-divider" />
+                  <div className="mt-4 silver-divider" />
                 </div>
               </div>
               )}
             </div>
             {/* Decorative frame corners */}
-            <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-gold/60 rounded-tl-lg" />
-            <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-gold/60 rounded-tr-lg" />
-            <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-gold/60 rounded-bl-lg" />
-            <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-gold/60 rounded-br-lg" />
+            <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-silver/60 rounded-tl-lg" />
+            <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-silver/60 rounded-tr-lg" />
+            <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-silver/60 rounded-bl-lg" />
+            <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-silver/60 rounded-br-lg" />
           </div>
         </motion.div>
 
@@ -106,32 +106,32 @@ export default function OverseerSection() {
           viewport={{ once: true }}
           className="space-y-6"
         >
-          <div className="text-[11px] tracking-[0.4em] uppercase text-gold/80">
+          <div className="text-[11px] tracking-[0.4em] uppercase text-accent/80">
             {t('overseer.title')}
           </div>
           <h2 className="font-display text-4xl md:text-5xl leading-tight">
-            <span className="gold-text">{cms.name.split(' ').slice(0, -1).join(' ') || 'Apostle Joshua'}</span>
+            <span className="heading-text">{cms.name.split(' ').slice(0, -1).join(' ') || 'Apostle Joshua'}</span>
             <br />
-            <span className="text-parchment">{cms.name.split(' ').pop() || 'O. Adekunle'}</span>
+            <span className="text-body">{cms.name.split(' ').pop() || 'O. Adekunle'}</span>
           </h2>
-          <div className="text-parchment/70 text-sm leading-relaxed max-w-lg space-y-4">
+          <div className="text-body text-sm leading-relaxed max-w-lg space-y-4">
             {cms.bio.split('\n').map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </div>
 
           {/* Quote */}
-          <div className="glass rounded-2xl p-5 border-l-4 border-gold">
-            <Quote className="w-5 h-5 text-gold mb-2" />
-            <p className="font-script italic text-lg text-parchment/90 leading-relaxed">
+          <div className="glass rounded-2xl p-5 border-l-4 border-silver">
+            <Quote className="w-5 h-5 text-accent mb-2" />
+            <p className="font-script italic text-lg text-body leading-relaxed">
               {cms.quote}
             </p>
-            <div className="mt-3 text-xs text-gold/80">— {cms.name}</div>
+            <div className="mt-3 text-xs text-accent/80">— {cms.name}</div>
           </div>
 
           {/* Video message CTA */}
           <div className="flex flex-wrap gap-3">
-            <button className="px-5 py-2.5 rounded-full btn-gold text-sm inline-flex items-center gap-2">
+            <button className="px-5 py-2.5 rounded-full btn-primary text-sm inline-flex items-center gap-2">
               <Play className="w-4 h-4 fill-current" /> {t('overseer.watch')}
             </button>
             <button className="px-5 py-2.5 rounded-full glass text-sm inline-flex items-center gap-2">
@@ -149,17 +149,17 @@ export default function OverseerSection() {
         className="mt-20"
       >
         <div className="text-center mb-10">
-          <div className="text-[11px] tracking-[0.4em] uppercase text-gold/80 mb-3">
+          <div className="text-[11px] tracking-[0.4em] uppercase text-accent/80 mb-3">
             Watch & Be Blessed
           </div>
-          <h2 className="font-display text-3xl md:text-4xl text-parchment">
+          <h2 className="font-display text-3xl md:text-4xl text-body">
             This Week's Message
           </h2>
-          <div className="gold-divider mt-4 mx-auto max-w-xs" />
+          <div className="silver-divider mt-4 mx-auto max-w-xs" />
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="relative rounded-2xl overflow-hidden glass-dark border border-gold/20">
+          <div className="relative rounded-2xl overflow-hidden glass-dark border border-silver/20">
             {(() => {
               const parsed = parseVideoUrl(cms.videoUrl);
               if (parsed) {
@@ -170,25 +170,25 @@ export default function OverseerSection() {
                 );
               }
               return (
-              <div className="aspect-video relative bg-gradient-to-br from-maroon-dark via-ink to-verdant-dark">
+              <div className="aspect-video relative bg-gradient-to-br from-accent-dark via-accent-dark to-accent-dark">
                 {/* Play button overlay */}
                 <div className="absolute inset-0 grid place-items-center">
-                  <div className="w-20 h-20 rounded-full bg-gold/90 grid place-items-center cursor-pointer hover:scale-105 transition shadow-2xl">
-                    <Play className="w-8 h-8 fill-ink ml-1" />
+                  <div className="w-20 h-20 rounded-full bg-accent/90 grid place-items-center cursor-pointer hover:scale-105 transition shadow-2xl">
+                    <Play className="w-8 h-8 fill-white ml-1" />
                   </div>
                 </div>
                 {/* Background pattern */}
                 <div className="absolute inset-0 divine-grid opacity-20" />
                 {/* Cross silhouette */}
                 <svg viewBox="0 0 100 100" className="absolute top-4 right-4 w-16 h-16 opacity-30">
-                  <rect x="44" y="10" width="12" height="80" fill="#d4af37" />
-                  <rect x="20" y="40" width="60" height="12" fill="#d4af37" />
+                  <rect x="44" y="10" width="12" height="80" fill="#BDC3C7" />
+                  <rect x="20" y="40" width="60" height="12" fill="#BDC3C7" />
                 </svg>
                 {/* Bottom info */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                  <div className="text-[10px] tracking-[0.3em] text-gold/80 uppercase">Sunday Divine Encounter</div>
-                  <div className="font-display text-xl text-parchment mt-1">"{cms.videoTitle}"</div>
-                  <div className="text-sm text-parchment/65 mt-0.5">{cms.videoPreacher} · {cms.videoVerse}</div>
+                  <div className="text-[10px] tracking-[0.3em] text-white/80 uppercase">Sunday Divine Encounter</div>
+                  <div className="font-display text-xl text-white mt-1">"{cms.videoTitle}"</div>
+                  <div className="text-sm text-white/75 mt-0.5">{cms.videoPreacher} · {cms.videoVerse}</div>
                 </div>
               </div>
               );

@@ -49,7 +49,7 @@ export default function BookstoreAdmin() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    api.getProducts().then(setProducts).catch(() => {});
+    api.getProducts().then((p) => setProducts(p.map((x: any) => ({ ...x, price: parseFloat(x.price) })))).catch(() => {});
     api.getBankAccounts().then(setBankAccounts).catch(() => {});
     api.getOrders().then(setOrders).catch(() => {});
   }, []);
@@ -108,13 +108,13 @@ export default function BookstoreAdmin() {
   return (
     <div className="max-w-7xl mx-auto px-5 lg:px-8 py-10">
       <div className="pt-20">
-        <h1 className="font-display text-4xl md:text-5xl gold-text">Bookstore Admin</h1>
-        <p className="mt-3 text-parchment/65">Manage products, bank accounts, and orders.</p>
-        <div className="gold-divider mt-6 max-w-xs" />
+        <h1 className="font-display text-4xl md:text-5xl heading-text">Bookstore Admin</h1>
+        <p className="mt-3 text-body">Manage products, bank accounts, and orders.</p>
+        <div className="silver-divider mt-6 max-w-xs" />
       </div>
 
       {message && (
-        <div className="mt-4 px-4 py-2.5 rounded-lg bg-verdant/20 border border-verdant/40 text-verdant-light text-sm">{message}</div>
+        <div className="mt-4 px-4 py-2.5 rounded-lg bg-accent/20 border border-accent/40 text-accent text-sm">{message}</div>
       )}
 
       <div className="mt-6 flex gap-1 glass-dark rounded-2xl p-1 w-fit">
@@ -127,7 +127,7 @@ export default function BookstoreAdmin() {
             key={t.key}
             onClick={() => setTab(t.key)}
             className={`px-4 py-2 rounded-xl text-sm inline-flex items-center gap-2 transition ${
-              tab === t.key ? "bg-gold/15 text-gold border border-gold/30" : "text-parchment/60 hover:text-parchment"
+              tab === t.key ? "bg-accent/15 text-accent border border-silver/30" : "text-body hover:text-body"
             }`}
           >
             <t.icon className="w-4 h-4" /> {t.label}
@@ -138,7 +138,7 @@ export default function BookstoreAdmin() {
       {/* Products tab */}
       {tab === "products" && (
         <div className="mt-6">
-          <button onClick={() => setEditing({ ...defaultProduct })} className="mb-4 px-4 py-2 rounded-full btn-gold text-sm inline-flex items-center gap-2">
+          <button onClick={() => setEditing({ ...defaultProduct })} className="mb-4 px-4 py-2 rounded-full btn-primary text-sm inline-flex items-center gap-2">
             <Plus className="w-4 h-4" /> Add Product
           </button>
 
@@ -147,58 +147,58 @@ export default function BookstoreAdmin() {
               <div key={p.id} className="glass rounded-2xl p-4 flex items-center gap-4">
                 <div className="w-12 h-16 rounded-md shrink-0" style={{ background: `linear-gradient(135deg,${p.color1},${p.color2})` }} />
                 <div className="flex-1 min-w-0">
-                  <div className="text-parchment font-medium">{p.title}</div>
-                  <div className="text-xs text-parchment/60">{p.author} · ${p.price.toFixed(2)}</div>
-                  <div className="text-[10px] text-parchment/40 mt-0.5">
-                    <span className={`px-1.5 py-0.5 rounded ${p.status === "live" ? "bg-verdant/20 text-verdant-light" : "bg-gold/20 text-gold"}`}>
+                  <div className="text-body font-medium">{p.title}</div>
+                  <div className="text-xs text-body">{p.author} · ${p.price.toFixed(2)}</div>
+                  <div className="text-[10px] text-body mt-0.5">
+                    <span className={`px-1.5 py-0.5 rounded ${p.status === "live" ? "bg-accent/20 text-accent" : "bg-accent/20 text-accent"}`}>
                       {p.status}
                     </span>
                   </div>
                 </div>
-                <button onClick={() => setEditing(p)} className="p-2 rounded-lg hover:bg-white/5 text-parchment/60"><Edit3 className="w-4 h-4" /></button>
-                <button onClick={() => deleteProduct(p.id)} className="p-2 rounded-lg hover:bg-white/5 text-maroon-light"><Trash2 className="w-4 h-4" /></button>
+                <button onClick={() => setEditing(p)} className="p-2 rounded-lg hover:bg-white/5 text-body"><Edit3 className="w-4 h-4" /></button>
+                <button onClick={() => deleteProduct(p.id)} className="p-2 rounded-lg hover:bg-white/5 text-accent"><Trash2 className="w-4 h-4" /></button>
               </div>
             ))}
-            {products.length === 0 && <div className="text-center text-parchment/40 py-8 text-sm">No products yet</div>}
+            {products.length === 0 && <div className="text-center text-body py-8 text-sm">No products yet</div>}
           </div>
 
           {/* Product editor modal */}
           {editing && (
             <>
               <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40" onClick={() => setEditing(null)} />
-              <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg z-50 glass-dark rounded-2xl p-6 border border-gold/30">
+              <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg z-50 glass-dark rounded-2xl p-6 border border-silver/30">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="font-display text-lg text-parchment">{editing.id ? "Edit Product" : "New Product"}</div>
-                  <button onClick={() => setEditing(null)} className="text-parchment/60"><X className="w-5 h-5" /></button>
+                  <div className="font-display text-lg text-body">{editing.id ? "Edit Product" : "New Product"}</div>
+                  <button onClick={() => setEditing(null)} className="text-body"><X className="w-5 h-5" /></button>
                 </div>
                 <div className="space-y-3">
-                  <input value={editing.title || ""} onChange={(e) => setEditing((p) => ({ ...p, title: e.target.value }))} placeholder="Title" className="w-full bg-black/40 border border-gold/15 rounded-xl px-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50" />
-                  <input value={editing.author || ""} onChange={(e) => setEditing((p) => ({ ...p, author: e.target.value }))} placeholder="Author" className="w-full bg-black/40 border border-gold/15 rounded-xl px-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50" />
-                  <input type="number" step="0.01" value={editing.price || ""} onChange={(e) => setEditing((p) => ({ ...p, price: parseFloat(e.target.value) || 0 }))} placeholder="Price" className="w-full bg-black/40 border border-gold/15 rounded-xl px-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50" />
+                  <input value={editing.title || ""} onChange={(e) => setEditing((p) => ({ ...p, title: e.target.value }))} placeholder="Title" className="w-full bg-white border border-silver/30 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accent/50" />
+                  <input value={editing.author || ""} onChange={(e) => setEditing((p) => ({ ...p, author: e.target.value }))} placeholder="Author" className="w-full bg-white border border-silver/30 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accent/50" />
+                  <input type="number" step="0.01" value={editing.price || ""} onChange={(e) => setEditing((p) => ({ ...p, price: parseFloat(e.target.value) || 0 }))} placeholder="Price" className="w-full bg-white border border-silver/30 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accent/50" />
                   <div className="flex gap-3">
                     <div>
-                      <label className="text-[10px] text-parchment/50 block mb-1">Color 1</label>
-                      <input type="color" value={editing.color1 || "#800000"} onChange={(e) => setEditing((p) => ({ ...p, color1: e.target.value }))} className="w-12 h-10 rounded-lg cursor-pointer bg-transparent border border-gold/15" />
+                      <label className="text-[10px] text-body block mb-1">Color 1</label>
+                      <input type="color" value={editing.color1 || "#800000"} onChange={(e) => setEditing((p) => ({ ...p, color1: e.target.value }))} className="w-12 h-10 rounded-lg cursor-pointer bg-transparent border border-silver/15" />
                     </div>
                     <div>
-                      <label className="text-[10px] text-parchment/50 block mb-1">Color 2</label>
-                      <input type="color" value={editing.color2 || "#4a0000"} onChange={(e) => setEditing((p) => ({ ...p, color2: e.target.value }))} className="w-12 h-10 rounded-lg cursor-pointer bg-transparent border border-gold/15" />
+                      <label className="text-[10px] text-body block mb-1">Color 2</label>
+                      <input type="color" value={editing.color2 || "#4a0000"} onChange={(e) => setEditing((p) => ({ ...p, color2: e.target.value }))} className="w-12 h-10 rounded-lg cursor-pointer bg-transparent border border-silver/15" />
                     </div>
                     <div>
-                      <label className="text-[10px] text-parchment/50 block mb-1">Rating</label>
-                      <input type="number" step="0.1" min="0" max="5" value={editing.rating || 5} onChange={(e) => setEditing((p) => ({ ...p, rating: parseFloat(e.target.value) || 5 }))} className="w-16 bg-black/40 border border-gold/15 rounded-xl px-3 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50" />
+                      <label className="text-[10px] text-body block mb-1">Rating</label>
+                      <input type="number" step="0.1" min="0" max="5" value={editing.rating || 5} onChange={(e) => setEditing((p) => ({ ...p, rating: parseFloat(e.target.value) || 5 }))} className="w-16 bg-white border border-silver/30 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-accent/50" />
                     </div>
                   </div>
                   <div>
-                    <label className="text-[10px] text-parchment/50 block mb-1">Status</label>
-                    <select value={editing.status || "draft"} onChange={(e) => setEditing((p) => ({ ...p, status: e.target.value }))} className="w-full bg-black/40 border border-gold/15 rounded-xl px-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50">
+                    <label className="text-[10px] text-body block mb-1">Status</label>
+                    <select value={editing.status || "draft"} onChange={(e) => setEditing((p) => ({ ...p, status: e.target.value }))} className="w-full bg-white border border-silver/30 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accent/50">
                       <option value="draft">Draft</option>
                       <option value="live">Live</option>
                     </select>
                   </div>
                 </div>
                 <div className="mt-5 flex gap-2">
-                  <button onClick={saveProduct} className="flex-1 py-3 rounded-full btn-gold text-sm inline-flex items-center justify-center gap-2"><Save className="w-4 h-4" /> Save</button>
+                  <button onClick={saveProduct} className="flex-1 py-3 rounded-full btn-primary text-sm inline-flex items-center justify-center gap-2"><Save className="w-4 h-4" /> Save</button>
                   <button onClick={() => setEditing(null)} className="px-6 py-3 rounded-full glass text-sm">Cancel</button>
                 </div>
               </div>
@@ -211,12 +211,12 @@ export default function BookstoreAdmin() {
       {tab === "bank-accounts" && (
         <div className="mt-6">
           <div className="glass rounded-2xl p-5 mb-6">
-            <div className="font-display text-base text-parchment mb-3">Add Bank Account</div>
+            <div className="font-display text-base text-body mb-3">Add Bank Account</div>
             <div className="grid sm:grid-cols-4 gap-3">
-              <input value={bankForm.bank_name} onChange={(e) => setBankForm((b) => ({ ...b, bank_name: e.target.value }))} placeholder="Bank name (e.g. GTBank)" className="bg-black/40 border border-gold/15 rounded-xl px-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50" />
-              <input value={bankForm.account_name} onChange={(e) => setBankForm((b) => ({ ...b, account_name: e.target.value }))} placeholder="Account name" className="bg-black/40 border border-gold/15 rounded-xl px-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50" />
-              <input value={bankForm.account_number} onChange={(e) => setBankForm((b) => ({ ...b, account_number: e.target.value }))} placeholder="Account number" className="bg-black/40 border border-gold/15 rounded-xl px-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50" />
-              <button onClick={saveBank} className="py-2.5 rounded-full btn-gold text-sm inline-flex items-center justify-center gap-2"><Plus className="w-4 h-4" /> Add</button>
+              <input value={bankForm.bank_name} onChange={(e) => setBankForm((b) => ({ ...b, bank_name: e.target.value }))} placeholder="Bank name (e.g. GTBank)" className="bg-white border border-silver/30 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accent/50" />
+              <input value={bankForm.account_name} onChange={(e) => setBankForm((b) => ({ ...b, account_name: e.target.value }))} placeholder="Account name" className="bg-white border border-silver/30 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accent/50" />
+              <input value={bankForm.account_number} onChange={(e) => setBankForm((b) => ({ ...b, account_number: e.target.value }))} placeholder="Account number" className="bg-white border border-silver/30 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accent/50" />
+              <button onClick={saveBank} className="py-2.5 rounded-full btn-primary text-sm inline-flex items-center justify-center gap-2"><Plus className="w-4 h-4" /> Add</button>
             </div>
           </div>
 
@@ -224,13 +224,13 @@ export default function BookstoreAdmin() {
             {bankAccounts.map((b) => (
               <div key={b.id} className="glass rounded-2xl p-4 flex items-center justify-between">
                 <div>
-                  <div className="text-parchment font-medium">{b.bank_name}</div>
-                  <div className="text-xs text-parchment/70">{b.account_name} · <span className="font-mono text-gold">{b.account_number}</span> · {b.currency}</div>
+                  <div className="text-body font-medium">{b.bank_name}</div>
+                  <div className="text-xs text-body">{b.account_name} · <span className="font-mono text-accent">{b.account_number}</span> · {b.currency}</div>
                 </div>
-                <button onClick={() => deleteBank(b.id)} className="p-2 rounded-lg hover:bg-white/5 text-maroon-light"><Trash2 className="w-4 h-4" /></button>
+                <button onClick={() => deleteBank(b.id)} className="p-2 rounded-lg hover:bg-white/5 text-accent"><Trash2 className="w-4 h-4" /></button>
               </div>
             ))}
-            {bankAccounts.length === 0 && <div className="text-center text-parchment/40 py-8 text-sm">No bank accounts set up</div>}
+            {bankAccounts.length === 0 && <div className="text-center text-body py-8 text-sm">No bank accounts set up</div>}
           </div>
         </div>
       )}
@@ -241,7 +241,7 @@ export default function BookstoreAdmin() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gold/15 text-[10px] uppercase tracking-widest text-parchment/50">
+                <tr className="border-b border-silver/15 text-[10px] uppercase tracking-widest text-body">
                   <th className="text-left px-4 py-3 font-medium">Customer</th>
                   <th className="text-left px-4 py-3 font-medium">Branch</th>
                   <th className="text-left px-4 py-3 font-medium">Address</th>
@@ -253,29 +253,29 @@ export default function BookstoreAdmin() {
               </thead>
               <tbody>
                 {orders.length === 0 && (
-                  <tr><td colSpan={7} className="text-center py-8 text-parchment/40">No orders yet</td></tr>
+                  <tr><td colSpan={7} className="text-center py-8 text-body">No orders yet</td></tr>
                 )}
                 {orders.map((o) => (
-                  <tr key={o.id} className="border-b border-gold/5 hover:bg-white/5 transition">
-                    <td className="px-4 py-3 text-parchment">
+                  <tr key={o.id} className="border-b border-silver/5 hover:bg-white/5 transition">
+                    <td className="px-4 py-3 text-body">
                       <div>{o.full_name}</div>
-                      <div className="text-[10px] text-parchment/50">{o.email}</div>
+                      <div className="text-[10px] text-body">{o.email}</div>
                     </td>
-                    <td className="px-4 py-3 text-parchment/80 text-xs">{o.branch_name || "—"}</td>
-                    <td className="px-4 py-3 text-parchment/60 text-xs max-w-[200px] truncate">{o.address || "—"}</td>
-                    <td className="px-4 py-3 text-right font-display gold-text">${parseFloat(o.total_amount as any).toFixed(2)}</td>
+                    <td className="px-4 py-3 text-body text-xs">{o.branch_name || "—"}</td>
+                    <td className="px-4 py-3 text-body text-xs max-w-[200px] truncate">{o.address || "—"}</td>
+                    <td className="px-4 py-3 text-right font-display heading-text">${parseFloat(o.total_amount as any).toFixed(2)}</td>
                     <td className="text-center px-4 py-3">
                       <span className={`text-[10px] px-2 py-0.5 rounded-full ${
-                        o.status === "verified" ? "bg-verdant/20 text-verdant-light" :
-                        o.status === "pending" ? "bg-gold/20 text-gold" : "bg-parchment/10 text-parchment/60"
+                        o.status === "verified" ? "bg-accent/20 text-accent" :
+                        o.status === "pending" ? "bg-accent/20 text-accent" : "bg-surface/10 text-body"
                       }`}>
                         {o.status}
                       </span>
                     </td>
-                    <td className="text-right px-4 py-3 text-parchment/50 text-xs">{new Date(o.created_at).toLocaleDateString()}</td>
+                    <td className="text-right px-4 py-3 text-body text-xs">{new Date(o.created_at).toLocaleDateString()}</td>
                     <td className="text-center px-4 py-3">
                       {o.status === "pending" && (
-                        <button onClick={() => verifyOrder(o.id)} className="p-1.5 rounded-lg bg-verdant/20 text-verdant-light hover:bg-verdant/30 transition" title="Verify order">
+                        <button onClick={() => verifyOrder(o.id)} className="p-1.5 rounded-lg bg-accent/20 text-accent hover:bg-accent/30 transition" title="Verify order">
                           <Check className="w-4 h-4" />
                         </button>
                       )}

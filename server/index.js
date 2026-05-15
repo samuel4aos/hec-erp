@@ -88,7 +88,7 @@ app.use('/api/preacher-log', preacherLogRoutes);
 // Serve built frontend
 const distPath = path.join(__dirname, '..', 'dist');
 app.use(express.static(distPath));
-app.get('*', (req, res) => {
+app.use((req, res) => {
   if (!req.path.startsWith('/api/')) {
     res.sendFile(path.join(distPath, 'index.html'));
   }

@@ -11,7 +11,7 @@ export default function LanguageToggle() {
     <div className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1.5 px-2.5 py-1.5 glass rounded-full text-[11px] text-parchment/80 hover:text-gold transition"
+        className="flex items-center gap-1.5 px-2.5 py-1.5 glass rounded-full text-[11px] text-body hover:text-accent transition"
       >
         <Globe2 className="w-3.5 h-3.5" />
         <span>{LANGS[lang]}</span>
@@ -31,14 +31,14 @@ export default function LanguageToggle() {
               initial={{ opacity: 0, y: -4, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -4, scale: 0.95 }}
-              className="absolute right-0 top-full mt-1 z-50 glass-dark rounded-xl border border-gold/30 p-1 min-w-[140px]"
+              className="absolute right-0 top-full mt-1 z-50 glass-dark rounded-xl border border-silver/30 p-1 min-w-[140px]"
             >
               {(Object.entries(LANGS) as [Lang, string][]).map(([code, name]) => (
                 <button
                   key={code}
                   onClick={() => { setLang(code); setOpen(false); }}
                   className={`w-full text-left px-3 py-2 rounded-lg text-sm transition ${
-                    lang === code ? "bg-gold/20 text-gold" : "text-parchment/70 hover:text-parchment hover:bg-white/5"
+                    lang === code ? "bg-accent/20 text-accent" : "text-body hover:text-body hover:bg-white/5"
                   }`}
                 >
                   {name}

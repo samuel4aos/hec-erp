@@ -37,13 +37,13 @@ export default function Home({ go }: { go: (s: any) => void }) {
   return (
     <div className="relative">
       {/* HERO */}
-      <section className="relative min-h-[92vh] maroon-bg overflow-hidden">
+      <section className="relative min-h-[92vh] accent-bg overflow-hidden">
         <div className="absolute inset-0 divine-grid opacity-30" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.18),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(44,62,80,0.18),transparent_60%)]" />
         {heroImage && (
           <div className="absolute inset-0">
             <img src={heroImage} alt="" className="w-full h-full object-cover opacity-20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-maroon/90 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-accent/90 to-transparent" />
           </div>
         )}
 
@@ -53,9 +53,9 @@ export default function Home({ go }: { go: (s: any) => void }) {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 glass rounded-full text-xs text-gold"
+              className="inline-flex items-center gap-2 px-3 py-1.5 glass rounded-full text-xs text-accent"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-verdant-light animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-light animate-pulse" />
               Multi-Tenant Church ERP · Powered by Neon Postgres + RLS
             </motion.div>
 
@@ -65,11 +65,11 @@ export default function Home({ go }: { go: (s: any) => void }) {
               transition={{ duration: 0.7, delay: 0.05 }}
               className="font-display text-5xl md:text-6xl lg:text-7xl mt-5 leading-[1.02]"
             >
-              <span className="gold-text">Holiness</span>
+              <span className="heading-text">Holiness</span>
               <br />
-              <span className="text-parchment">{t('home.hero.title').split(',')[1] || 'Without which,'}</span>
+              <span className="text-body">{t('home.hero.title').split(',')[1] || 'Without which,'}</span>
               <br />
-              <span className="font-script italic text-parchment/90">
+              <span className="font-script italic text-body">
                 no man shall see the Lord.
               </span>
             </motion.h1>
@@ -78,7 +78,7 @@ export default function Home({ go }: { go: (s: any) => void }) {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="mt-6 text-parchment/75 text-base md:text-lg max-w-xl leading-relaxed"
+              className="mt-6 text-body text-base md:text-lg max-w-xl leading-relaxed"
             >
               {t('home.hero.subtitle')}
             </motion.p>
@@ -91,13 +91,13 @@ export default function Home({ go }: { go: (s: any) => void }) {
             >
               <button
                 onClick={() => go("live")}
-                className="btn-gold px-6 py-3 rounded-full inline-flex items-center gap-2"
+                className="btn-primary px-6 py-3 rounded-full inline-flex items-center gap-2"
               >
                 {t('home.watch')} <ArrowRight className="w-4 h-4" />
               </button>
               <button
                 onClick={() => go("grace")}
-                className="px-6 py-3 rounded-full glass text-parchment/90 hover:text-gold transition"
+                className="px-6 py-3 rounded-full glass text-body hover:text-accent transition"
               >
                 {t('home.give')}
               </button>
@@ -114,11 +114,11 @@ export default function Home({ go }: { go: (s: any) => void }) {
                   transition={{ delay: 0.4 + i * 0.08 }}
                   className="glass rounded-xl p-3"
                 >
-                  <Icon className="w-4 h-4 text-gold mb-1.5" />
-                  <div className="font-display text-lg gold-text">
+                  <Icon className="w-4 h-4 text-accent mb-1.5" />
+                  <div className="font-display text-lg heading-text">
                     {statValues[i]}
                   </div>
-                  <div className="text-[10px] uppercase tracking-wider text-parchment/60">
+                  <div className="text-[10px] uppercase tracking-wider text-body">
                     {t(key)}
                   </div>
                 </motion.div>
@@ -130,10 +130,10 @@ export default function Home({ go }: { go: (s: any) => void }) {
           {/* 3D centerpiece */}
           <div className="relative h-[460px] lg:h-[640px]">
             <div className="absolute inset-0 rounded-[2rem] overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.25),transparent_60%)] halo" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(44,62,80,0.25),transparent_60%)] halo" />
               <Suspense
                 fallback={
-                  <div className="absolute inset-0 grid place-items-center text-gold/60 text-sm">
+                  <div className="absolute inset-0 grid place-items-center text-accent/60 text-sm">
                     ✦ Loading sanctuary...
                   </div>
                 }
@@ -141,7 +141,7 @@ export default function Home({ go }: { go: (s: any) => void }) {
                 <Hero3D />
               </Suspense>
             </div>
-            <div className="absolute -bottom-2 left-0 right-0 text-center text-[11px] tracking-[0.4em] text-gold/70 uppercase">
+            <div className="absolute -bottom-2 left-0 right-0 text-center text-[11px] tracking-[0.4em] text-accent/70 uppercase">
               Established · 1986 · Lagos · Nigeria
             </div>
           </div>

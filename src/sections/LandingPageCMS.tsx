@@ -63,20 +63,20 @@ export default function LandingPageCMS() {
   return (
     <div className="max-w-7xl mx-auto px-5 lg:px-8 py-10">
       <div className="pt-20">
-        <div className="flex items-center gap-2 text-gold/80 text-[11px] tracking-[0.4em] uppercase mb-3">
+        <div className="flex items-center gap-2 text-accent/80 text-[11px] tracking-[0.4em] uppercase mb-3">
           <Image className="w-4 h-4" /> HQ Super-Admin
         </div>
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
-            <h1 className="font-display text-4xl md:text-5xl gold-text">Landing Page CMS</h1>
-            <p className="mt-3 text-parchment/65 max-w-2xl">Edit every piece of content across the public website in real time.</p>
+            <h1 className="font-display text-4xl md:text-5xl heading-text">Landing Page CMS</h1>
+            <p className="mt-3 text-body max-w-2xl">Edit every piece of content across the public website in real time.</p>
           </div>
-          <button onClick={save} disabled={saving} className="px-5 py-2.5 rounded-full btn-gold text-sm inline-flex items-center gap-2">
-            {saving ? <div className="w-4 h-4 border-2 border-ink/30 border-t-ink rounded-full animate-spin" /> : <Save className="w-4 h-4" />}
+          <button onClick={save} disabled={saving} className="px-5 py-2.5 rounded-full btn-primary text-sm inline-flex items-center gap-2">
+            {saving ? <div className="w-4 h-4 border-2 border-accent/30 border-t-accent rounded-full animate-spin" /> : <Save className="w-4 h-4" />}
             {saved ? "Saved ✓" : "Save All Changes"}
           </button>
         </div>
-        <div className="gold-divider mt-6 max-w-xs" />
+        <div className="silver-divider mt-6 max-w-xs" />
       </div>
 
       <div className="mt-8 grid lg:grid-cols-[200px_1fr] gap-6">
@@ -87,7 +87,7 @@ export default function LandingPageCMS() {
               key={s.label}
               onClick={() => setActiveSection(s.label)}
               className={`w-full text-left flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm transition ${
-                activeSection === s.label ? "bg-gold/15 text-gold border border-gold/30" : "text-parchment/60 hover:text-parchment hover:bg-white/5"
+                activeSection === s.label ? "bg-accent/15 text-accent border border-silver/30" : "text-body hover:text-body hover:bg-white/5"
               }`}
             >
               <s.icon className="w-4 h-4" />
@@ -98,7 +98,7 @@ export default function LandingPageCMS() {
 
         {/* Content Editor */}
         <motion.div key={activeSection} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="glass rounded-2xl p-6">
-          <div className="font-display text-xl text-parchment mb-5">{activeSection}</div>
+          <div className="font-display text-xl text-body mb-5">{activeSection}</div>
           <div className="space-y-5">
             {currentSection.keys.map((key) => {
               const label = key.split(".").pop()?.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()) || key;
@@ -106,15 +106,15 @@ export default function LandingPageCMS() {
               const val = content[key] || "";
               return (
                 <div key={key}>
-                  <label className="text-[10px] tracking-widest text-gold/80 uppercase mb-1.5 block">{label}</label>
+                  <label className="text-[10px] tracking-widest text-accent/80 uppercase mb-1.5 block">{label}</label>
                   {isImageKey(key) ? (
                     <div className="space-y-2">
                       {val && (
-                        <img src={val} alt={label} className="w-32 h-32 object-cover rounded-xl border border-gold/30" />
+                        <img src={val} alt={label} className="w-32 h-32 object-cover rounded-xl border border-silver/30" />
                       )}
                       <div className="flex items-center gap-2">
-                        <label className="flex-1 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-black/40 border border-gold/15 text-sm text-parchment cursor-pointer hover:border-gold/50 transition">
-                          <Upload className="w-4 h-4 text-gold" />
+                        <label className="flex-1 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-silver/30 text-sm text-body cursor-pointer hover:border-silver/50 transition">
+                          <Upload className="w-4 h-4 text-accent" />
                           {uploading ? "Uploading..." : "Choose image"}
                           <input type="file" accept="image/*" className="hidden" onChange={(e) => {
                             const file = e.target.files?.[0];
@@ -122,24 +122,24 @@ export default function LandingPageCMS() {
                             e.target.value = "";
                           }} />
                         </label>
-                        <input value={val} onChange={(e) => update(key, e.target.value)} placeholder="Or paste image URL" className="flex-1 bg-black/40 border border-gold/15 rounded-xl px-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50" />
+                        <input value={val} onChange={(e) => update(key, e.target.value)} placeholder="Or paste image URL" className="flex-1 bg-white border border-silver/30 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accent/50" />
                       </div>
                     </div>
                   ) : key === "overseer.bio" || key === "hero.subtitle" ? (
-                    <textarea value={val} onChange={(e) => update(key, e.target.value)} rows={4} className="w-full bg-black/40 border border-gold/15 rounded-xl px-4 py-3 text-sm text-parchment focus:outline-none focus:border-gold/50 resize-none" />
+                    <textarea value={val} onChange={(e) => update(key, e.target.value)} rows={4} className="w-full bg-white border border-silver/30 rounded-xl px-4 py-3 text-sm text-body focus:outline-none focus:border-silver/50 resize-none" />
                   ) : isJson ? (
-                    <textarea value={val} onChange={(e) => update(key, e.target.value)} rows={3} className="w-full bg-black/40 border border-gold/15 rounded-xl px-4 py-3 text-sm text-parchment focus:outline-none focus:border-gold/50 font-mono text-xs" />
+                    <textarea value={val} onChange={(e) => update(key, e.target.value)} rows={3} className="w-full bg-white border border-silver/30 rounded-xl px-4 py-3 text-sm text-body focus:outline-none focus:border-silver/50 font-mono text-xs" />
                   ) : (
-                    <input value={val} onChange={(e) => update(key, e.target.value)} className="w-full bg-black/40 border border-gold/15 rounded-xl px-4 py-3 text-sm text-parchment focus:outline-none focus:border-gold/50" />
+                    <input value={val} onChange={(e) => update(key, e.target.value)} className="w-full bg-white border border-silver/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-accent/50" />
                   )}
                   {key.startsWith("stats.") && (
-                    <div className="text-[10px] text-parchment/40 mt-1">JSON format: {`{"value":"...","label":"..."}`}</div>
+                    <div className="text-[10px] text-body mt-1">JSON format: {`{"value":"...","label":"..."}`}</div>
                   )}
                   {key === "ticker.messages" && (
-                    <div className="text-[10px] text-parchment/40 mt-1">JSON array of announcement strings</div>
+                    <div className="text-[10px] text-body mt-1">JSON array of announcement strings</div>
                   )}
                   {key === "giving.accounts" && (
-                    <div className="text-[10px] text-parchment/40 mt-1">JSON array: {`[{"bank":"Bank Name","name":"Account Name","number":"0123456789","swift":"SWIFTCODE","purpose":"Tithes & Offerings","color":"#800000","flag":"🇳🇬"}]`}</div>
+                    <div className="text-[10px] text-body mt-1">JSON array: {`[{"bank":"Bank Name","name":"Account Name","number":"0123456789","swift":"SWIFTCODE","purpose":"Tithes & Offerings","color":"#800000","flag":"🇳🇬"}]`}</div>
                   )}
                 </div>
               );

@@ -43,7 +43,7 @@ function heatColor(v: number) {
   if (v < 20) return "rgba(128,0,0,0.25)";
   if (v < 40) return "rgba(128,0,0,0.55)";
   if (v < 60) return "rgba(163,32,32,0.85)";
-  if (v < 80) return "rgba(212,175,55,0.7)";
+  if (v < 80) return "rgba(160,168,180,0.7)";
   return "rgba(240,207,94,0.95)";
 }
 
@@ -137,11 +137,11 @@ export default function Analytics() {
           >
             <div className="flex items-center justify-between">
               <div className="w-9 h-9 rounded-lg grid place-items-center" style={{ background: k.color }}>
-                <k.icon className="w-4 h-4 text-parchment" />
+                <k.icon className="w-4 h-4 text-body" />
               </div>
             </div>
-            <div className="font-display text-2xl gold-text mt-3">{k.value}</div>
-            <div className="text-[11px] uppercase tracking-widest text-parchment/55">{k.label}</div>
+            <div className="font-display text-2xl heading-text mt-3">{k.value}</div>
+            <div className="text-[11px] uppercase tracking-widest text-body">{k.label}</div>
           </motion.div>
         ))}
       </div>
@@ -169,7 +169,7 @@ export default function Analytics() {
                   <stop offset="100%" stopColor="#f0cf5e" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(212,175,55,0.08)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(160,168,180,0.2)" />
               <XAxis dataKey="m" stroke="#d4af37" tick={{ fill: "#cfc1a0", fontSize: 11 }} />
               <YAxis stroke="#d4af37" tick={{ fill: "#cfc1a0", fontSize: 11 }} />
               <Tooltip contentStyle={tooltipStyle} />
@@ -207,7 +207,7 @@ export default function Analytics() {
           <ChartHead title="Financial reconciliation (USD · 000s)" />
           <ResponsiveContainer width="100%" height={280}>
             <BarChart data={finance}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(212,175,55,0.08)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(160,168,180,0.2)" />
               <XAxis dataKey="m" stroke="#d4af37" tick={{ fill: "#cfc1a0", fontSize: 11 }} />
               <YAxis stroke="#d4af37" tick={{ fill: "#cfc1a0", fontSize: 11 }} />
               <Tooltip contentStyle={tooltipStyle} />
@@ -223,7 +223,7 @@ export default function Analytics() {
           <ChartHead title="Souls won vs retained" />
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={conversions}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(212,175,55,0.08)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(160,168,180,0.2)" />
               <XAxis dataKey="m" stroke="#d4af37" tick={{ fill: "#cfc1a0", fontSize: 11 }} />
               <YAxis stroke="#d4af37" tick={{ fill: "#cfc1a0", fontSize: 11 }} />
               <Tooltip contentStyle={tooltipStyle} />
@@ -240,7 +240,7 @@ export default function Analytics() {
         <ChartHead title="Branch attendance heatmap · last 4 weeks" />
         <div className="overflow-x-auto">
           <div className="min-w-[640px]">
-            <div className="grid grid-cols-[140px_repeat(4,1fr)] gap-2 mb-2 text-[11px] text-parchment/55 uppercase tracking-widest">
+            <div className="grid grid-cols-[140px_repeat(4,1fr)] gap-2 mb-2 text-[11px] text-body uppercase tracking-widest">
               <div></div>
               {weeks.map((w) => (
                 <div key={w} className="text-center">{w}</div>
@@ -248,11 +248,11 @@ export default function Analytics() {
             </div>
             {branches.map((b, i) => (
               <div key={b} className="grid grid-cols-[140px_repeat(4,1fr)] gap-2 mb-1.5 items-center">
-                <div className="text-xs text-parchment/85">{b}</div>
+                <div className="text-xs text-body">{b}</div>
                 {heatmap[i]?.map((v, k) => (
                   <div
                     key={k}
-                    className="h-9 rounded-md grid place-items-center text-[11px] font-display border border-gold/15"
+                    className="h-9 rounded-md grid place-items-center text-[11px] font-display border border-silver/15"
                     style={{ background: heatColor(v), color: v > 60 ? "#1a0a0a" : "#f8f3e3" }}
                     title={`${b} · ${weeks[k]}: ${v}%`}
                   >
@@ -263,7 +263,7 @@ export default function Analytics() {
             ))}
           </div>
         </div>
-        <div className="mt-4 flex items-center gap-2 text-[11px] text-parchment/60">
+        <div className="mt-4 flex items-center gap-2 text-[11px] text-body">
           <span>Lower</span>
           <div className="flex-1 h-2 rounded-full" style={{ background: "linear-gradient(90deg,#400,#800000,#a32020,#d4af37,#f0cf5e)" }} />
           <span>Higher</span>
@@ -276,15 +276,15 @@ export default function Analytics() {
 function ChartHead({ title }: { title: string }) {
   return (
     <div className="flex items-center justify-between mb-3">
-      <div className="font-display text-base text-parchment">{title}</div>
-      <span className="text-[10px] text-parchment/50">RLS · HQ scope</span>
+      <div className="font-display text-base text-body">{title}</div>
+      <span className="text-[10px] text-body">RLS · HQ scope</span>
     </div>
   );
 }
 
 const tooltipStyle = {
   background: "rgba(20,8,8,0.92)",
-  border: "1px solid rgba(212,175,55,0.4)",
+  border: "1px solid rgba(44,62,80,0.4)",
   borderRadius: 8,
   fontSize: 12,
   color: "#f8f3e3",

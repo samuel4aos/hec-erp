@@ -112,9 +112,9 @@ export default function LiveStream() {
             ) : (
               <div className="absolute inset-0 flex items-center justify-center bg-black/80">
                 <div className="text-center">
-                  <Radio className="w-12 h-12 text-gold/40 mx-auto mb-3" />
-                  <div className="text-parchment/50 text-sm">No stream configured</div>
-                  <div className="text-parchment/30 text-[11px] mt-1">Admin can set a YouTube or Facebook URL in CMS</div>
+                  <Radio className="w-12 h-12 text-accent/40 mx-auto mb-3" />
+                  <div className="text-body text-sm">No stream configured</div>
+                  <div className="text-body/30 text-[11px] mt-1">Admin can set a YouTube or Facebook URL in CMS</div>
                 </div>
               </div>
             )}
@@ -122,11 +122,11 @@ export default function LiveStream() {
             {/* Overlay badge */}
             <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
               {isLive && embedUrl && (
-                <span className="px-2.5 py-1 rounded-md bg-maroon text-parchment text-[11px] font-bold tracking-widest inline-flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" /> LIVE
+                <span className="px-2.5 py-1 rounded-md bg-accent text-white text-[11px] font-bold tracking-widest inline-flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> LIVE
                 </span>
               )}
-              <span className="px-2 py-1 rounded-md glass text-[11px] text-parchment/80 inline-flex items-center gap-1.5">
+              <span className="px-2 py-1 rounded-md glass text-[11px] text-body inline-flex items-center gap-1.5">
                 <Users className="w-3 h-3" /> {viewerCount.toLocaleString()} watching
               </span>
             </div>
@@ -140,7 +140,7 @@ export default function LiveStream() {
                   animate={{ y: -120 - i * 30, opacity: 0, scale: 1.1 }}
                   transition={{ duration: 3, repeat: Infinity, delay: i * 0.7, ease: "easeOut" }}
                 >
-                  <Heart className="w-5 h-5 text-gold fill-gold" />
+                  <Heart className="w-5 h-5 text-accent fill-accent" />
                 </motion.div>
               ))}
             </div>
@@ -149,20 +149,20 @@ export default function LiveStream() {
             <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/85 to-transparent z-10">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <button className="w-10 h-10 grid place-items-center rounded-full btn-gold">
+                  <button className="w-10 h-10 grid place-items-center rounded-full btn-primary">
                     <Play className="w-4 h-4 fill-current" />
                   </button>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setHearts(hearts + 1)}
-                    className="px-3 py-1.5 rounded-md glass text-[11px] text-gold inline-flex items-center gap-1.5"
+                    className="px-3 py-1.5 rounded-md glass text-[11px] text-accent inline-flex items-center gap-1.5"
                   >
-                    <Heart className="w-3.5 h-3.5 fill-gold" /> {hearts.toLocaleString()}
+                    <Heart className="w-3.5 h-3.5 fill-accent" /> {hearts.toLocaleString()}
                   </button>
                   <button
                     onClick={() => setTheatre((v) => !v)}
-                    className="p-2 rounded-md glass text-parchment/80"
+                    className="p-2 rounded-md glass text-body"
                   >
                     {theatre ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
                   </button>
@@ -175,11 +175,11 @@ export default function LiveStream() {
           <div className="mt-5 glass rounded-2xl p-5">
             <div className="flex items-start justify-between gap-4 flex-wrap">
               <div>
-                <div className="text-[11px] tracking-widest text-gold/80">LIVE · DIVINE ENCOUNTER</div>
-                <div className="font-display text-2xl text-parchment mt-1">
+                <div className="text-[11px] tracking-widest text-accent/80">LIVE · DIVINE ENCOUNTER</div>
+                <div className="font-display text-2xl text-body mt-1">
                   {sermonTitle}
                 </div>
-                <div className="text-sm text-parchment/65 mt-1">
+                <div className="text-sm text-body mt-1">
                   Preached by · {sermonPreacher}
                 </div>
               </div>
@@ -187,12 +187,12 @@ export default function LiveStream() {
                 {sermonNotes && (
                   <button
                     onClick={() => setShowNotes((v) => !v)}
-                    className="px-4 py-2 rounded-full btn-maroon text-sm"
+                    className="px-4 py-2 rounded-full btn-primary text-sm"
                   >
                     Sermon Notes
                   </button>
                 )}
-                <button className="px-4 py-2 rounded-full btn-gold text-sm">Sow a Seed</button>
+                <button className="px-4 py-2 rounded-full btn-primary text-sm">Sow a Seed</button>
               </div>
             </div>
 
@@ -204,12 +204,12 @@ export default function LiveStream() {
                 className="mt-4 p-4 glass-dark rounded-xl"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <div className="text-[11px] tracking-widest text-gold/80 uppercase">Sermon Notes</div>
-                  <button onClick={copyNotes} className="text-[10px] px-2 py-1 rounded bg-gold/20 text-gold">
+                  <div className="text-[11px] tracking-widest text-accent/80 uppercase">Sermon Notes</div>
+                  <button onClick={copyNotes} className="text-[10px] px-2 py-1 rounded bg-accent/20 text-accent">
                     {copied ? "Copied!" : "Copy"}
                   </button>
                 </div>
-                <div className="text-sm text-parchment/80 whitespace-pre-wrap leading-relaxed">
+                <div className="text-sm text-body whitespace-pre-wrap leading-relaxed">
                   {sermonNotes}
                 </div>
               </motion.div>
@@ -220,12 +220,12 @@ export default function LiveStream() {
         {/* Chat sidebar — YouTube live chat */}
         {!theatre && (
           <div className="glass-dark rounded-2xl flex flex-col h-[640px]">
-            <div className="px-4 py-3 border-b border-gold/15 flex items-center justify-between">
-              <div className="inline-flex items-center gap-2 text-sm text-parchment">
-                <MessageCircle className="w-4 h-4 text-gold" />
+            <div className="px-4 py-3 border-b border-silver/15 flex items-center justify-between">
+              <div className="inline-flex items-center gap-2 text-sm text-body">
+                <MessageCircle className="w-4 h-4 text-accent" />
                 {streamData?.platform === "youtube" ? "Live Chat" : "Sanctuary Chat"}
               </div>
-              <span className="text-[10px] text-parchment/50">
+              <span className="text-[10px] text-body">
                 {streamData?.platform === "youtube" ? "synced with YouTube" : "internal chat"}
               </span>
             </div>
@@ -245,25 +245,25 @@ export default function LiveStream() {
                     animate={{ opacity: 1, x: 0 }}
                     className="text-[13px]"
                   >
-                    <div className="text-gold/90 text-[11px] font-semibold flex justify-between">
+                    <div className="text-accent/90 text-[11px] font-semibold flex justify-between">
                       <span>{c.name}</span>
-                      <span className="text-parchment/40">{c.t}</span>
+                      <span className="text-body">{c.t}</span>
                     </div>
-                    <div className="text-parchment/85 mt-0.5">{c.msg}</div>
+                    <div className="text-body mt-0.5">{c.msg}</div>
                   </motion.div>
                 ))}
               </div>
             )}
             {streamData?.platform !== "youtube" && (
-              <div className="p-3 border-t border-gold/15 flex gap-2">
+              <div className="p-3 border-t border-silver/15 flex gap-2">
                 <input
                   value={msg}
                   onChange={(e) => setMsg(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && send()}
                   placeholder="Share an Amen..."
-                  className="flex-1 bg-black/40 border border-gold/15 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-gold/50"
+                  className="flex-1 bg-white border border-silver/30 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-silver/50"
                 />
-                <button onClick={send} className="w-10 h-10 grid place-items-center rounded-full btn-gold">
+                <button onClick={send} className="w-10 h-10 grid place-items-center rounded-full btn-primary">
                   <Send className="w-4 h-4" />
                 </button>
               </div>
@@ -278,9 +278,9 @@ export default function LiveStream() {
 export function Header({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="pt-20">
-      <h1 className="font-display text-4xl md:text-5xl gold-text">{title}</h1>
-      {subtitle && <p className="mt-3 text-parchment/65 max-w-2xl">{subtitle}</p>}
-      <div className="gold-divider mt-6 max-w-xs" />
+      <h1 className="font-display text-4xl md:text-5xl heading-text">{title}</h1>
+      {subtitle && <p className="mt-3 text-body max-w-2xl">{subtitle}</p>}
+      <div className="silver-divider mt-6 max-w-xs" />
     </div>
   );
 }

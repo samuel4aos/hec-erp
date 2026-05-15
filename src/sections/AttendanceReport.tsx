@@ -40,7 +40,7 @@ export default function AttendanceReport() {
   if (!data) {
     return (
       <div className="max-w-7xl mx-auto px-5 lg:px-8 py-10">
-        <div className="pt-20 text-center text-parchment/50">Loading attendance report...</div>
+        <div className="pt-20 text-center text-body">Loading attendance report...</div>
       </div>
     );
   }
@@ -64,8 +64,8 @@ export default function AttendanceReport() {
       <div className="pt-20">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
-            <h1 className="font-display text-4xl md:text-5xl gold-text">Attendance Report</h1>
-            <p className="mt-3 text-parchment/65">
+            <h1 className="font-display text-4xl md:text-5xl heading-text">Attendance Report</h1>
+            <p className="mt-3 text-body">
               {totalSundays} Sunday services tracked · {totalMembers} active members · {avgAttendance}% avg attendance
             </p>
           </div>
@@ -74,7 +74,7 @@ export default function AttendanceReport() {
               <select
                 value={selectedBranch}
                 onChange={(e) => setSelectedBranch(e.target.value)}
-                className="bg-black/40 border border-gold/15 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-gold/50 text-parchment"
+                className="bg-white border border-silver/30 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-silver/50 text-body"
               >
                 <option value="">All Branches</option>
                 {branches.map((b: any) => (
@@ -91,23 +91,23 @@ export default function AttendanceReport() {
             </a>
           </div>
         </div>
-        <div className="gold-divider mt-6 max-w-xs" />
+        <div className="silver-divider mt-6 max-w-xs" />
       </div>
 
       {/* Summary cards */}
       <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: "Active Members", value: totalMembers, icon: Users, color: "text-gold" },
-          { label: "Avg Attendance Rate", value: `${avgAttendance}%`, icon: TrendingUp, color: "text-verdant-light" },
-          { label: "Missed Last Week", value: members.filter((m) => m.attended === 0).length, icon: AlertTriangle, color: "text-maroon-light" },
-          { label: "Care Alerts", value: careAlerts.length, icon: BarChart3, color: "text-gold" },
+          { label: "Active Members", value: totalMembers, icon: Users, color: "text-accent" },
+          { label: "Avg Attendance Rate", value: `${avgAttendance}%`, icon: TrendingUp, color: "text-accent" },
+          { label: "Missed Last Week", value: members.filter((m) => m.attended === 0).length, icon: AlertTriangle, color: "text-accent" },
+          { label: "Care Alerts", value: careAlerts.length, icon: BarChart3, color: "text-accent" },
         ].map((s) => (
           <div key={s.label} className="glass rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-2">
               <s.icon className={`w-4 h-4 ${s.color}`} />
-              <div className="text-[10px] tracking-widest uppercase text-parchment/60">{s.label}</div>
+              <div className="text-[10px] tracking-widest uppercase text-body">{s.label}</div>
             </div>
-            <div className="font-display text-2xl gold-text">{s.value}</div>
+            <div className="font-display text-2xl heading-text">{s.value}</div>
           </div>
         ))}
       </div>
@@ -116,8 +116,8 @@ export default function AttendanceReport() {
       {monthlyTrend.length > 0 && (
         <div className="mt-8 glass rounded-2xl p-5">
           <div className="flex items-center gap-2 mb-4">
-            <BarChart3 className="w-4 h-4 text-gold" />
-            <div className="font-display text-base text-parchment">Monthly Attendance Trend</div>
+            <BarChart3 className="w-4 h-4 text-accent" />
+            <div className="font-display text-base text-body">Monthly Attendance Trend</div>
           </div>
           <div className="h-[250px]">
             <ResponsiveContainer>
@@ -138,20 +138,20 @@ export default function AttendanceReport() {
 
       {/* Per-member table */}
       <div className="mt-8 glass-dark rounded-2xl overflow-hidden">
-        <div className="p-4 border-b border-gold/15 flex items-center gap-3">
-          <Search className="w-4 h-4 text-gold/60" />
+        <div className="p-4 border-b border-silver/15 flex items-center gap-3">
+          <Search className="w-4 h-4 text-accent/60" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search member..."
-            className="flex-1 bg-transparent text-sm focus:outline-none text-parchment placeholder:text-parchment/40"
+            className="flex-1 bg-transparent text-sm focus:outline-none text-body placeholder:text-body"
           />
-          <span className="text-[10px] text-parchment/50">{sorted.length} members</span>
+          <span className="text-[10px] text-body">{sorted.length} members</span>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gold/15 text-[10px] uppercase tracking-widest text-parchment/50">
+              <tr className="border-b border-silver/15 text-[10px] uppercase tracking-widest text-body">
                 <th className="text-left px-4 py-3 font-medium">Member</th>
                 <th className="text-center px-3 py-3 font-medium">Sundays</th>
                 <th className="text-center px-3 py-3 font-medium">Attended</th>
@@ -162,7 +162,7 @@ export default function AttendanceReport() {
             </thead>
             <tbody>
               {sorted.length === 0 && (
-                <tr><td colSpan={6} className="text-center py-8 text-parchment/40">No members match your search</td></tr>
+                <tr><td colSpan={6} className="text-center py-8 text-body">No members match your search</td></tr>
               )}
               {sorted.map((m, i) => (
                 <motion.tr
@@ -170,38 +170,38 @@ export default function AttendanceReport() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: i * 0.005 }}
-                  className={`border-b border-gold/5 hover:bg-white/5 transition ${
-                    m.needs_care ? "bg-maroon/10" : ""
+                  className={`border-b border-silver/5 hover:bg-white/5 transition ${
+                    m.needs_care ? "bg-accent/10" : ""
                   }`}
                 >
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold to-maroon grid place-items-center text-[9px] font-display text-ink shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-accent grid place-items-center text-[9px] font-display text-white shrink-0">
                         {m.first_name[0]}{m.last_name[0]}
                       </div>
                       <div className="min-w-0">
-                        <div className="text-parchment text-sm">{m.first_name} {m.last_name}</div>
-                        {m.phone && <div className="text-[10px] text-parchment/40">{m.phone}</div>}
+                        <div className="text-body text-sm">{m.first_name} {m.last_name}</div>
+                        {m.phone && <div className="text-[10px] text-body">{m.phone}</div>}
                       </div>
                     </div>
                   </td>
-                  <td className="text-center px-3 py-3 text-parchment/80">{m.total_sundays}</td>
-                  <td className="text-center px-3 py-3 text-verdant-light">{m.attended}</td>
-                  <td className="text-center px-3 py-3 text-maroon-light">{m.missed}</td>
+                  <td className="text-center px-3 py-3 text-body">{m.total_sundays}</td>
+                  <td className="text-center px-3 py-3 text-accent">{m.attended}</td>
+                  <td className="text-center px-3 py-3 text-accent">{m.missed}</td>
                   <td className="text-center px-3 py-3">
                     <div className="flex items-center justify-center gap-2">
                       <div className="w-16 h-1.5 rounded-full bg-black/40 overflow-hidden">
                         <div
-                          className={`h-full rounded-full ${m.attendance_rate >= 70 ? "bg-verdant" : m.attendance_rate >= 40 ? "bg-gold" : "bg-maroon-light"}`}
+                          className={`h-full rounded-full ${m.attendance_rate >= 70 ? "bg-accent" : m.attendance_rate >= 40 ? "bg-accent" : "bg-accent-light"}`}
                           style={{ width: `${m.attendance_rate}%` }}
                         />
                       </div>
-                      <span className={`text-[11px] font-mono ${m.attendance_rate >= 70 ? "text-verdant-light" : m.attendance_rate >= 40 ? "text-gold" : "text-maroon-light"}`}>
+                      <span className={`text-[11px] font-mono ${m.attendance_rate >= 70 ? "text-accent" : m.attendance_rate >= 40 ? "text-accent" : "text-accent"}`}>
                         {m.attendance_rate}%
                       </span>
                     </div>
                   </td>
-                  <td className="text-right px-4 py-3 text-parchment/50 text-[11px]">
+                  <td className="text-right px-4 py-3 text-body text-[11px]">
                     {m.last_attended ? new Date(m.last_attended).toLocaleDateString() : "—"}
                   </td>
                 </motion.tr>
@@ -213,20 +213,20 @@ export default function AttendanceReport() {
 
       {/* Care alerts section */}
       {careAlerts.length > 0 && (
-        <div className="mt-6 glass-dark rounded-2xl p-5 border-l-2 border-maroon-light">
+        <div className="mt-6 glass-dark rounded-2xl p-5 border-l-2 border-accent-light">
           <div className="flex items-center gap-2 mb-3">
-            <AlertTriangle className="w-4 h-4 text-maroon-light" />
-            <div className="font-display text-base text-parchment">Care Alerts — {careAlerts.length} members need attention</div>
+            <AlertTriangle className="w-4 h-4 text-accent" />
+            <div className="font-display text-base text-body">Care Alerts — {careAlerts.length} members need attention</div>
           </div>
           <div className="grid sm:grid-cols-2 gap-2">
             {careAlerts.map((m) => (
-              <div key={m.id} className="flex items-center gap-3 px-3 py-2 rounded-lg bg-black/30 border border-maroon/20 text-sm">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-maroon to-gold grid place-items-center text-[9px] font-display text-ink shrink-0">
+              <div key={m.id} className="flex items-center gap-3 px-3 py-2 rounded-lg bg-black/30 border border-accent/20 text-sm">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-accent grid place-items-center text-[9px] font-display text-white shrink-0">
                   {m.first_name[0]}{m.last_name[0]}
                 </div>
                 <div className="min-w-0">
-                  <div className="text-parchment">{m.first_name} {m.last_name}</div>
-                  <div className="text-[10px] text-parchment/50">{m.attended}/{m.total_sundays} attended · {m.phone || ""}</div>
+                  <div className="text-body">{m.first_name} {m.last_name}</div>
+                  <div className="text-[10px] text-body">{m.attended}/{m.total_sundays} attended · {m.phone || ""}</div>
                 </div>
               </div>
             ))}

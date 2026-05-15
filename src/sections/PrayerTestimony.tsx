@@ -151,13 +151,13 @@ export default function PrayerTestimony() {
               </Suspense>
             </Canvas>
           </div>
-          <div className="text-center text-[11px] tracking-widest text-gold/70 uppercase mt-2">
+          <div className="text-center text-[11px] tracking-widest text-accent/70 uppercase mt-2">
             {prayers.length} active petitions · refreshed live
           </div>
 
           {/* Compose */}
           <div className="mt-5 glass rounded-2xl p-5">
-            <div className="text-[11px] tracking-widest text-gold/80 uppercase mb-2">
+            <div className="text-[11px] tracking-widest text-accent/80 uppercase mb-2">
               Drop your prayer
             </div>
             <textarea
@@ -165,16 +165,16 @@ export default function PrayerTestimony() {
               onChange={(e) => setDraft(e.target.value)}
               rows={3}
               placeholder="Lord, I bring before You..."
-              className="w-full bg-black/40 border border-gold/15 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold/50 resize-none"
+              className="w-full bg-white border border-silver/30 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-silver/50 resize-none"
             />
             <div className="mt-3 flex items-center justify-between">
-              <label className="inline-flex items-center gap-2 text-xs text-parchment/65">
+              <label className="inline-flex items-center gap-2 text-xs text-body">
                 <input type="checkbox" className="accent-gold" defaultChecked /> Submit anonymously
               </label>
               <button
                 onClick={drop}
                 disabled={dropping}
-                className="px-5 py-2 rounded-full btn-gold text-sm inline-flex items-center gap-2"
+                className="px-5 py-2 rounded-full btn-primary text-sm inline-flex items-center gap-2"
               >
                 {dropping ? "Dropping..." : <>Drop Prayer <Send className="w-3.5 h-3.5" /></>}
               </button>
@@ -185,7 +185,7 @@ export default function PrayerTestimony() {
         {/* Recent prayers + testimony wall */}
         <div className="space-y-6">
           <div className="glass rounded-2xl p-5">
-            <div className="font-display text-lg text-parchment mb-3">
+            <div className="font-display text-lg text-body mb-3">
               Latest petitions
             </div>
             <div className="space-y-2 max-h-56 overflow-y-auto pr-2">
@@ -196,7 +196,7 @@ export default function PrayerTestimony() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0 }}
-                    className="text-sm text-parchment/85 px-3 py-2 rounded-lg bg-black/30 border border-gold/10"
+                    className="text-sm text-body px-3 py-2 rounded-lg bg-black/30 border border-silver/10"
                   >
                     {p}
                   </motion.div>
@@ -207,10 +207,10 @@ export default function PrayerTestimony() {
 
           <div>
             <div className="flex items-center justify-between mb-4">
-              <div className="font-display text-lg gold-text inline-flex items-center gap-2">
+              <div className="font-display text-lg heading-text inline-flex items-center gap-2">
                 <Quote className="w-4 h-4" /> Testimony Wall
               </div>
-              <span className="text-[10px] tracking-widest text-verdant-light inline-flex items-center gap-1">
+              <span className="text-[10px] tracking-widest text-accent inline-flex items-center gap-1">
                 <ShieldCheck className="w-3 h-3" /> Pastor-moderated
               </span>
             </div>
@@ -225,32 +225,32 @@ export default function PrayerTestimony() {
                   className="glass rounded-2xl p-5"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-maroon to-gold grid place-items-center font-display text-xs text-parchment shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent grid place-items-center font-display text-xs text-white shrink-0">
                       {t.name.split(" ").map(n => n[0]).slice(0,2).join("")}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between gap-3 flex-wrap">
                         <div>
-                          <div className="text-sm text-parchment">{t.name}</div>
-                          <div className="text-[11px] text-gold/70">{t.branch}</div>
+                          <div className="text-sm text-body">{t.name}</div>
+                          <div className="text-[11px] text-accent/70">{t.branch}</div>
                         </div>
                         {t.video && (
-                          <span className="inline-flex items-center gap-1 text-[10px] text-parchment/70 px-2 py-0.5 rounded-full bg-maroon/40 border border-gold/20">
+                          <span className="inline-flex items-center gap-1 text-[10px] text-body px-2 py-0.5 rounded-full bg-accent/40 border border-silver/20">
                             <Play className="w-2.5 h-2.5 fill-current" /> Video story
                           </span>
                         )}
                       </div>
-                      <div className="font-display text-base text-parchment mt-2">
+                      <div className="font-display text-base text-body mt-2">
                         "{t.title}"
                       </div>
-                      <p className="text-sm text-parchment/70 mt-1.5 leading-relaxed">
+                      <p className="text-sm text-body mt-1.5 leading-relaxed">
                         {t.body}
                       </p>
                       <div className="mt-3 flex items-center gap-4 text-xs">
-                        <button className="inline-flex items-center gap-1.5 text-parchment/65 hover:text-gold">
+                        <button className="inline-flex items-center gap-1.5 text-body hover:text-accent">
                           <Heart className="w-3.5 h-3.5" /> {t.likes.toLocaleString()}
                         </button>
-                        <button className="text-parchment/65 hover:text-gold">Share testimony</button>
+                        <button className="text-body hover:text-accent">Share testimony</button>
                       </div>
                     </div>
                   </div>

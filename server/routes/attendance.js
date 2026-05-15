@@ -114,7 +114,7 @@ router.get('/summary', authenticate, async (req, res) => {
         AND service_date >= CURRENT_DATE - (${monthsBack} || ' months')::INTERVAL
       ORDER BY service_date DESC
     `;
-    const recordMap: Record<string, any[]> = {};
+    const recordMap = {};
     for (const r of records) {
       if (!recordMap[r.member_id]) recordMap[r.member_id] = [];
       recordMap[r.member_id].push(r);

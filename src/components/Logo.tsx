@@ -20,8 +20,8 @@ export default function Logo({ size = 44 }: { size?: number }) {
           style={{ width: size, height: size }}
         />
         <div className="leading-tight">
-          <div className="font-display text-[15px] tracking-[0.18em] gold-text">HOLINESS</div>
-          <div className="font-display text-[10px] tracking-[0.32em] text-parchment/80">EVANGELISTIC CHURCH</div>
+          <div className="font-display text-[15px] tracking-[0.18em] heading-text">HOLINESS</div>
+          <div className="font-display text-[10px] tracking-[0.32em] text-body">EVANGELISTIC CHURCH</div>
         </div>
       </div>
     );
@@ -37,7 +37,7 @@ export default function Logo({ size = 44 }: { size?: number }) {
           background:
             "radial-gradient(circle at 30% 30%, #f0cf5e 0%, #d4af37 40%, #800000 75%, #4a0000 100%)",
           boxShadow:
-            "0 0 22px rgba(212,175,55,0.55), inset 0 1px 4px rgba(255,255,255,0.4)",
+            "0 0 22px rgba(44,62,80,0.55), inset 0 1px 4px rgba(255,255,255,0.4)",
         }}
       >
         <svg viewBox="0 0 64 64" width={size * 0.62} height={size * 0.62}>
@@ -55,8 +55,8 @@ export default function Logo({ size = 44 }: { size?: number }) {
         </svg>
       </div>
       <div className="leading-tight">
-        <div className="font-display text-[15px] tracking-[0.18em] gold-text">HOLINESS</div>
-        <div className="font-display text-[10px] tracking-[0.32em] text-parchment/80">EVANGELISTIC CHURCH</div>
+        <div className="font-display text-[15px] tracking-[0.18em] heading-text">HOLINESS</div>
+        <div className="font-display text-[10px] tracking-[0.32em] text-body">EVANGELISTIC CHURCH</div>
       </div>
     </div>
   );

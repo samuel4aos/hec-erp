@@ -43,7 +43,7 @@ export default function Bookstore() {
   const [address, setAddress] = useState("");
 
   useEffect(() => {
-    api.getProducts().then((p) => setProducts(p.filter((x: any) => x.status === "live"))).catch(() => {});
+    api.getProducts().then((p) => setProducts(p.filter((x: any) => x.status === "live").map((x: any) => ({ ...x, price: parseFloat(x.price) })))).catch(() => {});
     api.getBankAccounts().then(setBanks).catch(() => {});
     api.getBranches().then(setBranches).catch(() => {});
   }, []);
@@ -81,16 +81,16 @@ export default function Bookstore() {
       />
 
       <div className="mt-8 flex items-center justify-between">
-        <div className="text-[11px] tracking-widest text-gold/70 uppercase">
+        <div className="text-[11px] tracking-widest text-accent/70 uppercase">
           Featured · Curated by HQ Editorial
         </div>
         <button
           onClick={() => setCheckout(true)}
-          className="relative px-4 py-2 rounded-full btn-gold text-sm inline-flex items-center gap-2"
+          className="relative px-4 py-2 rounded-full btn-primary text-sm inline-flex items-center gap-2"
         >
           <ShoppingBag className="w-4 h-4" /> Cart
           {cart.length > 0 && (
-            <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-verdant text-parchment text-[10px] grid place-items-center font-bold">
+            <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-accent text-white text-[10px] grid place-items-center font-bold">
               {cart.length}
             </span>
           )}
@@ -128,15 +128,15 @@ export default function Bookstore() {
                   style={{
                     background: `linear-gradient(135deg, ${b.color1}, ${b.color2})`,
                     boxShadow: "0 18px 40px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15)",
-                    border: "1px solid rgba(212,175,55,0.4)",
+                    border: "1px solid rgba(44,62,80,0.4)",
                   }}
                 >
-                  <div className="text-[8px] tracking-[0.3em] text-gold/90 uppercase">HEC Press</div>
+                  <div className="text-[8px] tracking-[0.3em] text-accent/90 uppercase">HEC Press</div>
                   <div>
-                    <div className="font-display text-[13px] leading-tight text-parchment">{b.title}</div>
-                    <div className="text-[9px] text-gold mt-1">{b.author}</div>
+                    <div className="font-display text-[13px] leading-tight text-body">{b.title}</div>
+                    <div className="text-[9px] text-accent mt-1">{b.author}</div>
                   </div>
-                  <div className="border-t border-gold/40 pt-1.5 text-[8px] text-gold/80 tracking-widest">HOLINESS · EVANGELISTIC · CHURCH</div>
+                  <div className="border-t border-silver/40 pt-1.5 text-[8px] text-accent/80 tracking-widest">HOLINESS · EVANGELISTIC · CHURCH</div>
                 </div>
                 <div
                   className="absolute right-0 top-1 bottom-1 w-1.5 rounded-r-sm"
@@ -145,16 +145,16 @@ export default function Bookstore() {
               </motion.div>
             </div>
 
-            <div className="flex items-center justify-between text-[11px] text-parchment/65">
-              <span className="inline-flex items-center gap-1 text-gold">
+            <div className="flex items-center justify-between text-[11px] text-body">
+              <span className="inline-flex items-center gap-1 text-accent">
                 <Star className="w-3 h-3 fill-current" /> {b.rating} · {b.reviews}
               </span>
-              <span className="text-parchment/85 font-display">${b.price.toFixed(2)}</span>
+              <span className="text-body font-display">${b.price.toFixed(2)}</span>
             </div>
-            <div className="font-display text-base text-parchment mt-2">{b.title}</div>
-            <div className="text-[11px] text-parchment/60">by {b.author}</div>
+            <div className="font-display text-base text-body mt-2">{b.title}</div>
+            <div className="text-[11px] text-body">by {b.author}</div>
 
-            <button onClick={() => add(b)} className="mt-4 w-full py-2 rounded-full btn-maroon text-sm border border-gold/30">
+            <button onClick={() => add(b)} className="mt-4 w-full py-2 rounded-full btn-primary text-sm border border-silver/30">
               Add to cart
             </button>
           </motion.div>
@@ -177,18 +177,18 @@ export default function Bookstore() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 22 }}
-              className="fixed top-0 right-0 bottom-0 w-full sm:w-[440px] z-50 glass-dark border-l border-gold/30 flex flex-col"
+              className="fixed top-0 right-0 bottom-0 w-full sm:w-[440px] z-50 glass-dark border-l border-silver/30 flex flex-col"
             >
-              <div className="p-5 border-b border-gold/20 flex items-center justify-between">
-                <div className="font-display text-lg text-parchment">Checkout</div>
-                <button onClick={() => setCheckout(false)} className="text-parchment/70">
+              <div className="p-5 border-b border-silver/20 flex items-center justify-between">
+                <div className="font-display text-lg text-body">Checkout</div>
+                <button onClick={() => setCheckout(false)} className="text-body">
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               <div className="flex-1 overflow-y-auto p-5 space-y-3">
                 {cart.length === 0 && (
-                  <div className="text-center text-sm text-parchment/55 py-12">Your cart is empty.</div>
+                  <div className="text-center text-sm text-body py-12">Your cart is empty.</div>
                 )}
 
                 {/* Cart items */}
@@ -196,10 +196,10 @@ export default function Bookstore() {
                   <div key={i} className="flex items-center gap-3 glass rounded-xl p-3">
                     <div className="w-10 h-14 rounded-sm shrink-0" style={{ background: `linear-gradient(135deg,${b.color1},${b.color2})` }} />
                     <div className="flex-1 min-w-0">
-                      <div className="text-sm text-parchment truncate">{b.title}</div>
-                      <div className="text-[11px] text-gold">${b.price.toFixed(2)}</div>
+                      <div className="text-sm text-body truncate">{b.title}</div>
+                      <div className="text-[11px] text-accent">${b.price.toFixed(2)}</div>
                     </div>
-                    <button onClick={() => remove(i)} className="text-parchment/55 hover:text-maroon-light">
+                    <button onClick={() => remove(i)} className="text-body hover:text-accent">
                       <X className="w-4 h-4" />
                     </button>
                   </div>
@@ -209,44 +209,44 @@ export default function Bookstore() {
                   <>
                     {/* Buyer details form */}
                     <div className="glass rounded-xl p-4 space-y-3">
-                      <div className="text-[11px] tracking-widest text-gold/80 uppercase mb-1">Your Details</div>
+                      <div className="text-[11px] tracking-widest text-accent/80 uppercase mb-1">Your Details</div>
                       <div className="relative">
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gold/60" />
-                        <input value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Full name *" className="w-full bg-black/40 border border-gold/15 rounded-xl pl-10 pr-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50" />
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-accent/60" />
+                        <input value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Full name *" className="w-full bg-white border border-silver/30 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-accent/50" />
                       </div>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gold/60" />
-                        <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email *" className="w-full bg-black/40 border border-gold/15 rounded-xl pl-10 pr-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50" />
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-accent/60" />
+                        <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email *" className="w-full bg-white border border-silver/30 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-accent/50" />
                       </div>
                       <div className="relative">
-                        <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gold/60" />
-                        <select value={branchId} onChange={(e) => setBranchId(e.target.value)} className="w-full bg-black/40 border border-gold/15 rounded-xl pl-10 pr-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50 appearance-none">
+                        <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-accent/60" />
+                        <select value={branchId} onChange={(e) => setBranchId(e.target.value)} className="w-full bg-white border border-silver/30 rounded-xl pl-10 pr-4 py-2.5 text-sm text-body focus:outline-none focus:border-silver/50 appearance-none">
                           <option value="">Select your church branch</option>
                           {branches.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
                         </select>
                       </div>
                       <div className="relative">
-                        <MapPin className="absolute left-3 top-3 w-4 h-4 text-gold/60" />
-                        <textarea value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Your address" rows={2} className="w-full bg-black/40 border border-gold/15 rounded-xl pl-10 pr-4 py-2.5 text-sm text-parchment focus:outline-none focus:border-gold/50 resize-none" />
+                        <MapPin className="absolute left-3 top-3 w-4 h-4 text-accent/60" />
+                        <textarea value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Your address" rows={2} className="w-full bg-white border border-silver/30 rounded-xl pl-10 pr-4 py-2.5 text-sm text-body focus:outline-none focus:border-silver/50 resize-none" />
                       </div>
                     </div>
 
                     {/* Payment info */}
                     <div className="glass rounded-xl p-4">
-                      <div className="text-[11px] tracking-widest text-gold/80 uppercase mb-2">Manual Payment</div>
-                      <p className="text-xs text-parchment/65">
+                      <div className="text-[11px] tracking-widest text-accent/80 uppercase mb-2">Manual Payment</div>
+                      <p className="text-xs text-body">
                         Transfer the total to the account below, then upload your receipt. HQ verifies within minutes — your PDFs are emailed automatically.
                       </p>
                       {selectedBank ? (
-                        <div className="mt-3 p-3 rounded-lg bg-black/40 border border-gold/15 text-xs">
-                          <div className="text-parchment/55">{selectedBank.bank_name}</div>
-                          <div className="font-display gold-text">{selectedBank.account_name}</div>
-                          <div className="font-mono text-gold text-sm mt-1">{selectedBank.account_number}</div>
-                          <div className="text-parchment/55 mt-1">Ref:</div>
-                          <code className="text-gold">HEC-BK-{Math.random().toString(36).slice(2, 8).toUpperCase()}</code>
+                        <div className="mt-3 p-3 rounded-lg bg-white border border-silver/30 text-xs">
+                          <div className="text-body">{selectedBank.bank_name}</div>
+                          <div className="font-display heading-text">{selectedBank.account_name}</div>
+                          <div className="font-mono text-accent text-sm mt-1">{selectedBank.account_number}</div>
+                          <div className="text-body mt-1">Ref:</div>
+                          <code className="text-accent">HEC-BK-{Math.random().toString(36).slice(2, 8).toUpperCase()}</code>
                         </div>
                       ) : (
-                        <div className="mt-3 p-3 rounded-lg bg-black/40 border border-gold/15 text-xs text-parchment/60">
+                        <div className="mt-3 p-3 rounded-lg bg-white border border-silver/30 text-xs text-body">
                           No bank accounts configured. Contact HQ for payment instructions.
                         </div>
                       )}
@@ -259,40 +259,40 @@ export default function Bookstore() {
 
                 {stage === "verifying" && (
                   <div className="text-center py-8">
-                    <div className="mx-auto w-12 h-12 rounded-full border-2 border-gold/30 border-t-gold animate-spin" />
-                    <div className="mt-4 font-display text-parchment">Submitting order...</div>
-                    <div className="text-xs text-parchment/55 mt-1">HQ Treasurer will review your payment.</div>
+                    <div className="mx-auto w-12 h-12 rounded-full border-2 border-silver/30 border-t-gold animate-spin" />
+                    <div className="mt-4 font-display text-body">Submitting order...</div>
+                    <div className="text-xs text-body mt-1">HQ Treasurer will review your payment.</div>
                   </div>
                 )}
 
                 {stage === "done" && (
                   <div className="text-center py-8">
-                    <div className="w-14 h-14 mx-auto rounded-full bg-verdant grid place-items-center">
-                      <Check className="w-7 h-7 text-parchment" />
+                    <div className="w-14 h-14 mx-auto rounded-full bg-accent grid place-items-center text-white">
+                      <Check className="w-7 h-7 text-body" />
                     </div>
-                    <div className="mt-4 font-display text-lg gold-text">Order Submitted</div>
-                    <p className="text-sm text-parchment/70 mt-2">
+                    <div className="mt-4 font-display text-lg heading-text">Order Submitted</div>
+                    <p className="text-sm text-body mt-2">
                       Your order is pending HQ verification. PDFs will be emailed once payment clears.
                     </p>
-                    <div className="mt-4 inline-flex items-center gap-2 text-xs text-verdant-light glass rounded-full px-3 py-1.5">
+                    <div className="mt-4 inline-flex items-center gap-2 text-xs text-accent glass rounded-full px-3 py-1.5">
                       <Mail className="w-3.5 h-3.5" /> {cart.length} file{cart.length > 1 ? "s" : ""} pending
                     </div>
                   </div>
                 )}
               </div>
 
-              <div className="p-5 border-t border-gold/20">
+              <div className="p-5 border-t border-silver/20">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm text-parchment/65">Total</span>
-                  <span className="font-display text-xl gold-text">${total.toFixed(2)}</span>
+                  <span className="text-sm text-body">Total</span>
+                  <span className="font-display text-xl heading-text">${total.toFixed(2)}</span>
                 </div>
                 {stage === "pay" && cart.length > 0 && (
-                  <button onClick={submit} disabled={!fullName || !email} className="w-full py-3 rounded-full btn-gold inline-flex items-center justify-center gap-2 disabled:opacity-50">
+                  <button onClick={submit} disabled={!fullName || !email} className="w-full py-3 rounded-full btn-primary inline-flex items-center justify-center gap-2 disabled:opacity-50">
                     <FileCheck2 className="w-4 h-4" /> Place Order
                   </button>
                 )}
                 {stage === "done" && (
-                  <button onClick={() => { setCheckout(false); setCart([]); setStage("pay"); setFullName(""); setEmail(""); setBranchId(""); setAddress(""); }} className="w-full py-3 rounded-full btn-maroon">
+                  <button onClick={() => { setCheckout(false); setCart([]); setStage("pay"); setFullName(""); setEmail(""); setBranchId(""); setAddress(""); }} className="w-full py-3 rounded-full btn-primary">
                     Done
                   </button>
                 )}

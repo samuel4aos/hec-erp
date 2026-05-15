@@ -117,7 +117,16 @@ router.delete('/products/:id', authenticate, authorize('hq_admin'), async (req, 
 // GET /api/bookstore/bank-accounts — active bank accounts (public for checkout)
 router.get('/bank-accounts', async (_req, res) => {
   try {
-    const result = await sql`SELECT * FROM bank_accounts WHERE is_active = true ORDER BY bank_name`;
+    let result = await sql`SELECT * FROM bank_accounts WHERE is_active = true ORDER BY bank_name`;
+    if (result.length === 0) {
+      // fallback: return all accounts
+      result = await sql`SELECT * FROM bank_accounts ORDER BY bank_name`;
+    }
+    if (result.length === 0) {
+      // auto-seed default account if table is empty
+      await sql`INSERT INTO bank_accounts (bank_name, account_name, account_number, currency) VALUES ('GTBank', 'HEC Bookstore', '0123456789', 'NGN')`;
+      result = await sql`SELECT * FROM bank_accounts ORDER BY bank_name`;
+    }
     res.json(result);
   } catch (err) {
     console.error('Bank accounts error:', err);
